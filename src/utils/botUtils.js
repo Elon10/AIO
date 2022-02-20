@@ -47,7 +47,7 @@ function validateConfig() {
 }
 
 async function startupCheck() {
-  await checkForUpdates();
+  // await checkForUpdates();
   validateConfig();
 }
 

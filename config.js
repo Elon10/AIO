@@ -8,7 +8,7 @@ module.exports = {
     failureURL: "http://localhost:8080/", // failure redirect url
     port: "8080", // port to run the bot on
   },
-  INTERACTIONS: { 
+  INTERACTIONS: {
     SLASH: true, // Should the interactions be enabled
     CONTEXT: true, // Should contexts be enabled
     GLOBAL: true, // Should the interactions be registered globally

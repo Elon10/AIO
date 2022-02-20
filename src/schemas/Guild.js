@@ -114,6 +114,10 @@ const Schema = mongoose.Schema({
       footer: String,
     },
   },
+  disabledCommands: {
+    type: Array,
+    default: [],
+  },
 });
 
 const Model = mongoose.model("guild", Schema);
@@ -131,7 +135,7 @@ module.exports = {
           region: guild.preferredLocale,
           owner: {
             id: guild.ownerId,
-            tag: guild.members.cache.get(guild.ownerId).user.tag,
+            tag: (await guild.members.fetch(guild.ownerId)).user.tag,
           },
           joinedAt: guild.joinedAt,
         },

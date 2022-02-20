@@ -59,6 +59,39 @@ router.get("/:serverID/greeting", CheckAuth, async (req, res) => {
   });
 });
 
+router.get("/:serverID/commands", CheckAuth, async (req, res) => {
+  // Check if the user has the permissions to edit this guild
+  const guild = req.client.guilds.cache.get(req.params.serverID);
+  if (
+    !guild ||
+    !req.userInfos.displayedGuilds ||
+    !req.userInfos.displayedGuilds.find((g) => g.id === req.params.serverID)
+  ) {
+    return res.render("404", {
+      user: req.userInfos,
+      currentURL: `${req.client.config.DASHBOARD.baseURL}/${req.originalUrl}`,
+    });
+  }
+
+  const settings = await getSettings(guild);
+  // Fetch guild informations
+  const guildInfos = await utils.fetchGuild(guild.id, req.client, req.user.guilds);
+
+  res.render("manager/commands", {
+    guild: guildInfos,
+    user: req.userInfos,
+    bot: req.client,
+    currentURL: `${req.client.config.DASHBOARD.baseURL}/${req.originalUrl}`,
+    commands: req.client.commands
+      .map((cmd) => ({
+        name: cmd.name,
+        description: cmd.description,
+        disabled: settings?.disabledCommands?.includes(cmd.name),
+      }))
+      .sort((cmd) => cmd.name),
+  });
+});
+
 router.post("/:serverID/basic", CheckAuth, async (req, res) => {
   // Check if the user has the permissions to edit this guild
   const guild = req.client.guilds.cache.get(req.params.serverID);
@@ -257,6 +290,31 @@ router.post("/:serverID/greeting", CheckAuth, async (req, res) => {
 
   await settings.save();
   res.redirect(303, `/manage/${guild.id}/greeting`);
+});
+
+router.post("/:serverID/commands", CheckAuth, async (req, res) => {
+  // Check if the user has the permissions to edit this guild
+  const guild = req.client.guilds.cache.get(req.params.serverID);
+  if (
+    !guild ||
+    !req.userInfos.displayedGuilds ||
+    !req.userInfos.displayedGuilds.find((g) => g.id === req.params.serverID)
+  ) {
+    return res.render("404", {
+      user: req.userInfos,
+      currentURL: `${req.client.config.DASHBOARD.baseURL}/${req.originalUrl}`,
+    });
+  }
+
+  const settings = await getSettings(guild);
+  const data = req.body;
+  const commands = req.client.commands.map((cmd) => cmd.name);
+
+  settings.disabledCommands = commands.filter((cmd) => !data[cmd]);
+  settings.markModified("disabledCommands");
+
+  await settings.save();
+  res.redirect(303, `/manage/${guild.id}/commands`);
 });
 
 module.exports = router;
