@@ -118,6 +118,13 @@ const Schema = mongoose.Schema({
     type: Array,
     default: [],
   },
+  ticketPanels: [
+    {
+      name: String,
+      channel: String,
+      role: [String],
+    },
+  ],
 });
 
 const Model = mongoose.model("guild", Schema);

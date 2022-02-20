@@ -64,3 +64,8 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+.vscomp-toggle-button {
+  height: 32px !important;
+  @apply rounded-md !important;
+}
