@@ -1,9 +1,9 @@
 {
-  "name": "discord-js-bot",
+  "name": "aio",
   "version": "4.0.0",
   "description": "A multipurpose discord bot built using discord-js",
   "main": "bot.js",
-  "author": "Sai Teja M",
+  "author": "River#0003",
   "license": "ISC",
   "scripts": {
     "dev": "nodemon .",

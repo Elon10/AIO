@@ -1,6 +1,8 @@
+const {uuid} = require('uuidv4');
 const { getJson } = require("@utils/httpUtils");
 const config = require("@root/config.js");
 const { success, warn, error, log } = require("@src/helpers/logger");
+
 
 function validateConfig() {
   log("Validating config.js and environment variables");
@@ -47,7 +49,6 @@ function validateConfig() {
 }
 
 async function startupCheck() {
-  await checkForUpdates();
   validateConfig();
 }
 
@@ -68,6 +69,15 @@ async function sendMessage(channel, content, seconds) {
   } catch (ex) {
     error(`sendMessage`, ex);
   }
+}
+
+async function savePremuimCode(guild, user)
+{
+  const code = uuid();
+  const pCode = new PremuimCode({code});
+  await pCode.save();
+
+  await channel.send('Code generated and saved in DB');
 }
 
 /**
@@ -150,6 +160,8 @@ const musicValidations = [
     message: "🚫 You're not in the same voice channel.",
   },
 ];
+
+  
 
 module.exports = {
   permissions,
