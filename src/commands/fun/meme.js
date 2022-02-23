@@ -125,18 +125,19 @@ async function getRandomEmbed(choice) {
     return new MessageEmbed().setColor(EMBED_COLORS.ERROR).setDescription("Failed to fetch meme. Try again!");
   }
 
-  const json = response.data;
-  if (!Array.isArray(json) || json.length === 0) {
+  if (!Array.isArray(response.data) || response.data.length === 0) {
     return new MessageEmbed().setColor(EMBED_COLORS.ERROR).setDescription(`No meme found matching ${choice}`);
   }
 
+  const json = response.data[0].data.children.filter(child => !child.data.over_18)[0].data;
+
   try {
-    let permalink = json[0].data.children[0].data.permalink;
+    let permalink = json.permalink;
     let memeUrl = `https://reddit.com${permalink}`;
-    let memeImage = json[0].data.children[0].data.url;
-    let memeTitle = json[0].data.children[0].data.title;
-    let memeUpvotes = json[0].data.children[0].data.ups;
-    let memeNumComments = json[0].data.children[0].data.num_comments;
+    let memeImage = json.url;
+    let memeTitle = json.title;
+    let memeUpvotes = json.ups;
+    let memeNumComments = json.num_comments;
 
     return new MessageEmbed()
       .setAuthor(memeTitle, null, memeUrl)
