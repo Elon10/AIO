@@ -113,7 +113,7 @@ const Schema = mongoose.Schema({
       thumbnail: Boolean,
       footer: String,
     },
-  },
+  }
 });
 
 const Model = mongoose.model("guild", Schema);
