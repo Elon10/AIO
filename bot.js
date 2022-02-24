@@ -1,6 +1,7 @@
 require("dotenv").config();
 require("module-alias/register");
 
+
 const path = require("path");
 const { startupCheck } = require("@utils/botUtils");
 const { BotClient } = require("@src/structures");

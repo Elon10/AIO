@@ -22,7 +22,8 @@ module.exports = class BotClient extends Client {
       ],
       partials: ["USER", "MESSAGE", "REACTION"],
       allowedMentions: {
-        repliedUser: false,
+        repliedUser: true,
+        parse: ['users', 'roles']
       },
       restRequestTimeout: 20000,
     });
@@ -228,7 +229,7 @@ module.exports = class BotClient extends Client {
     });
     this.logger.success(`Loaded ${this.commands.length} commands`);
     this.logger.success(`Loaded ${this.slashCommands.size} slash commands`);
-    if (this.slashCommands.size > 100) throw new Error("A maximum of 100 slash commands can be enabled");
+    if (this.slashCommands.size > 1000) throw new Error("A maximum of 1000 slash commands can be enabled");
   }
 
   /**

@@ -1,32 +1,32 @@
 module.exports = {
   ADMIN: {
     name: "Admin",
-    image: "https://icons.iconarchive.com/icons/dakirby309/simply-styled/256/Settings-icon.png",
+    image: "https://media.discordapp.net/attachments/945112333666099230/945114496400236544/admin.gif?width=400&height=400",
     emoji: "⚙️",
   },
   AUTOMOD: {
     name: "Automod",
-    image: "https://icons.iconarchive.com/icons/dakirby309/simply-styled/256/Settings-icon.png",
+    image: "https://media.discordapp.net/attachments/945112333666099230/945116369014390794/automod.gif?width=400&height=400",
     emoji: "🤖",
   },
   ANIME: {
     name: "Anime",
-    image: "https://acegif.com/wp-content/gif/blushing-58.gif",
+    image: "https://cdn.discordapp.com/attachments/945112333666099230/945116875237523497/anime.gif",
     emoji: "🎨",
   },
   ECONOMY: {
     name: "Economy",
-    image: "https://icons.iconarchive.com/icons/custom-icon-design/pretty-office-11/128/coins-icon.png",
+    image: "https://cdn.discordapp.com/attachments/945112333666099230/945117609412677673/economy.gif",
     emoji: "🪙",
   },
   FUN: {
     name: "Fun",
-    image: "https://icons.iconarchive.com/icons/flameia/aqua-smiles/128/make-fun-icon.png",
+    image: "https://cdn.discordapp.com/attachments/945112333666099230/945118013487738970/fun.gif",
     emoji: "😂",
   },
   IMAGE: {
     name: "Image",
-    image: "https://icons.iconarchive.com/icons/dapino/summer-holiday/128/photo-icon.png",
+    image: "https://cdn.discordapp.com/attachments/945112333666099230/945118601629819010/image.gif",
     emoji: "🖼️",
   },
   INVITE: {
@@ -36,41 +36,41 @@ module.exports = {
   },
   INFORMATION: {
     name: "Information",
-    image: "https://icons.iconarchive.com/icons/graphicloads/100-flat/128/information-icon.png",
+    image: "https://cdn.discordapp.com/attachments/945112333666099230/945119121903853608/information.gif",
     emoji: "🪧",
   },
   MODERATION: {
     name: "Moderation",
-    image: "https://icons.iconarchive.com/icons/lawyerwordpress/law/128/Gavel-Law-icon.png",
+    image: "https://media.discordapp.net/attachments/945112333666099230/945120103861735444/moderation.gif?width=400&height=400",
     emoji: "🔨",
   },
   MUSIC: {
     name: "Music",
-    image: "https://icons.iconarchive.com/icons/wwalczyszyn/iwindows/256/Music-Library-icon.png",
+    image: "https://media.discordapp.net/attachments/945112333666099230/945120636580270100/Music.gif?width=400&height=400",
     emoji: "🎵",
   },
   OWNER: {
     name: "Owner",
-    image: "https://www.pinclipart.com/picdir/middle/531-5318253_web-designing-icon-png-clipart.png",
+    image: "https://media.discordapp.net/attachments/945112333666099230/945120988985716776/owner.gif?width=400&height=400",
     emoji: "🤴",
   },
   SOCIAL: {
     name: "Social",
-    image: "https://icons.iconarchive.com/icons/dryicons/aesthetica-2/128/community-users-icon.png",
+    image: "https://cdn.discordapp.com/attachments/945112333666099230/945121474988089404/social.gif",
     emoji: "🫂",
   },
   TICKET: {
     name: "Ticket",
-    image: "https://icons.iconarchive.com/icons/custom-icon-design/flatastic-2/512/ticket-icon.png",
+    image: "https://cdn.discordapp.com/attachments/945112333666099230/945122189496188948/ticket.gif",
     emoji: "🎫",
   },
   UTILITY: {
     name: "Utility",
-    image: "https://icons.iconarchive.com/icons/blackvariant/button-ui-system-folders-alt/128/Utilities-icon.png",
+    image: "https://wellowise.com/assets/images/hotlink-ok/newPackages/rewiseMind/phone.gif",
     emoji: "🛠",
   GIVEAWAY: {
     name: "Giveaway",
-    image: "https://icons.iconarchive.com/icons/blackvariant/button-ui-system-folders-alt/128/Utilities-icon.png",
+    image: "https://i.pinimg.com/originals/7d/b3/24/7db324ed27acf79d21e3a3132287623c.gif",
     emoji: "🎁",
   }
   },

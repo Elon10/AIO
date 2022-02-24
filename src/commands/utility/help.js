@@ -153,7 +153,7 @@ const waiter = (msg, userId, prefix) => {
 
   const collector = msg.channel.createMessageComponentCollector({
     filter: (reactor) => reactor.user.id === userId,
-    idle: IDLE_TIMEOUT * 1000,
+    idle: IDLE_TIMEOUT * 50000,
     dispose: true,
     time: 5 * 60 * 1000,
   });
