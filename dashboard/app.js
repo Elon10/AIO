@@ -7,6 +7,7 @@ module.exports.launch = async (client) => {
 
   const express = require("express"),
     session = require("express-session"),
+    MongoStore = require("connect-mongo"),
     path = require("path"),
     app = express();
 
@@ -28,7 +29,16 @@ module.exports.launch = async (client) => {
     .use(express.static(path.join(__dirname, "/public"))) // Set the css and js folder to ./public
     .set("views", path.join(__dirname, "/views")) // Set the ejs templates to ./views
     .set("port", config.DASHBOARD.port) // Set the dashboard port
-    .use(session({ secret: process.env.SESSION_PASSWORD, resave: false, saveUninitialized: false })) // Set the express session password and configuration
+    .use(
+      session({
+        secret: process.env.SESSION_PASSWORD,
+        resave: false,
+        saveUninitialized: false,
+        store: MongoStore.create({
+          mongoUrl: process.env.MONGO_CONNECTION,
+        }),
+      })
+    ) // Set the express session password and configuration
     .use(async function (req, res, next) {
       req.user = req.session.user;
       req.client = client;

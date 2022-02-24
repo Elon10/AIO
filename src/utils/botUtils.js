@@ -1,4 +1,4 @@
-const {uuid} = require('uuidv4');
+const { uuid } = require("uuidv4");
 const { getJson } = require("@utils/httpUtils");
 const config = require("@root/config.js");
 const { success, warn, error, log } = require("@src/helpers/logger");
@@ -71,8 +71,7 @@ async function sendMessage(channel, content, seconds) {
   }
 }
 
-async function savePremuimCode(guild, user)
-{
+async function savePremuimCode(guild, user) {
   const code = uuid();
   const pCode = new PremuimCode({code});
   await pCode.save();

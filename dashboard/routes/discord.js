@@ -11,7 +11,7 @@ router.get("/login", async function (req, res) {
       `https://discordapp.com/api/oauth2/authorize?client_id=${
         req.client.user.id
       }&scope=identify%20guilds&response_type=code&redirect_uri=${encodeURIComponent(
-        req.client.config.DASHBOARD.baseURL + "/api/callback"
+        req.client.config.DASHBOARD.baseURL + "api/callback"
       )}&state=${req.query.state || "no"}`
     );
   }
@@ -31,7 +31,7 @@ router.get("/callback", async (req, res) => {
   const params = new URLSearchParams();
   params.set("grant_type", "authorization_code");
   params.set("code", req.query.code);
-  params.set("redirect_uri", `${req.client.config.DASHBOARD.baseURL}/api/callback`);
+  params.set("redirect_uri", `${req.client.config.DASHBOARD.baseURL}api/callback`);
   let response = await fetch("https://discord.com/api/oauth2/token", {
     method: "POST",
     body: params.toString(),
@@ -43,6 +43,7 @@ router.get("/callback", async (req, res) => {
   // Fetch tokens (used to fetch user information's)
   const tokens = await response.json();
   // If the code isn't valid
+
   if (tokens.error || !tokens.access_token) return res.redirect(`/api/login&state=${req.query.state}`);
   const userData = {
     infos: null,

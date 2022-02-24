@@ -136,7 +136,7 @@ async function closeAllTickets(guild, author) {
  * @param {import('discord.js').User} user
  * @param {Object} config
  */
-async function openTicket(guild, user, config) {
+async function openTicket(guild, user, config, roles = []) {
   if (!guild.me.permissions.has(OPEN_PERMS)) return "MISSING_PERMISSIONS";
 
   const alreadyExists = getExistingTicketChannel(guild, user.id);
@@ -161,6 +161,7 @@ async function openTicket(guild, user, config) {
         id: guild.me.roles.highest.id,
         allow: ["VIEW_CHANNEL", "SEND_MESSAGES", "READ_MESSAGE_HISTORY"],
       },
+      ...roles.map((r) => ({ id: r, allow: ["VIEW_CHANNEL", "SEND_MESSAGES", "READ_MESSAGE_HISTORY"] })),
     ];
 
     if (config.support_roles.length > 0) {

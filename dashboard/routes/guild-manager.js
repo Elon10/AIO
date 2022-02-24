@@ -1,4 +1,5 @@
 const { getSettings } = require("@schemas/Guild");
+const { MessageActionRow, MessageButton } = require("discord.js");
 
 const express = require("express"),
   utils = require("../utils"),
@@ -52,6 +53,64 @@ router.get("/:serverID/greeting", CheckAuth, async (req, res) => {
   const guildInfos = await utils.fetchGuild(guild.id, req.client, req.user.guilds);
 
   res.render("manager/greeting", {
+    guild: guildInfos,
+    user: req.userInfos,
+    bot: req.client,
+    currentURL: `${req.client.config.DASHBOARD.baseURL}/${req.originalUrl}`,
+  });
+});
+
+router.get("/:serverID/commands", CheckAuth, async (req, res) => {
+  // Check if the user has the permissions to edit this guild
+  const guild = req.client.guilds.cache.get(req.params.serverID);
+  if (
+    !guild ||
+    !req.userInfos.displayedGuilds ||
+    !req.userInfos.displayedGuilds.find((g) => g.id === req.params.serverID)
+  ) {
+    return res.render("404", {
+      user: req.userInfos,
+      currentURL: `${req.client.config.DASHBOARD.baseURL}/${req.originalUrl}`,
+    });
+  }
+
+  const settings = await getSettings(guild);
+  // Fetch guild informations
+  const guildInfos = await utils.fetchGuild(guild.id, req.client, req.user.guilds);
+
+  res.render("manager/commands", {
+    guild: guildInfos,
+    user: req.userInfos,
+    bot: req.client,
+    currentURL: `${req.client.config.DASHBOARD.baseURL}/${req.originalUrl}`,
+    commands: req.client.commands
+      .map((cmd) => ({
+        name: cmd.name,
+        description: cmd.description,
+        disabled: settings?.disabledCommands?.includes(cmd.name),
+      }))
+      .sort((cmd) => cmd.name),
+  });
+});
+
+router.get("/:serverID/ticketpanels", CheckAuth, async (req, res) => {
+  // Check if the user has the permissions to edit this guild
+  const guild = req.client.guilds.cache.get(req.params.serverID);
+  if (
+    !guild ||
+    !req.userInfos.displayedGuilds ||
+    !req.userInfos.displayedGuilds.find((g) => g.id === req.params.serverID)
+  ) {
+    return res.render("404", {
+      user: req.userInfos,
+      currentURL: `${req.client.config.DASHBOARD.baseURL}/${req.originalUrl}`,
+    });
+  }
+
+  // Fetch guild informations
+  const guildInfos = await utils.fetchGuild(guild.id, req.client, req.user.guilds);
+
+  res.render("manager/ticketpanels", {
     guild: guildInfos,
     user: req.userInfos,
     bot: req.client,
@@ -257,6 +316,190 @@ router.post("/:serverID/greeting", CheckAuth, async (req, res) => {
 
   await settings.save();
   res.redirect(303, `/manage/${guild.id}/greeting`);
+});
+
+router.post("/:serverID/commands", CheckAuth, async (req, res) => {
+  // Check if the user has the permissions to edit this guild
+  const guild = req.client.guilds.cache.get(req.params.serverID);
+  if (
+    !guild ||
+    !req.userInfos.displayedGuilds ||
+    !req.userInfos.displayedGuilds.find((g) => g.id === req.params.serverID)
+  ) {
+    return res.render("404", {
+      user: req.userInfos,
+      currentURL: `${req.client.config.DASHBOARD.baseURL}/${req.originalUrl}`,
+    });
+  }
+
+  const settings = await getSettings(guild);
+  const data = req.body;
+  const commands = req.client.commands.map((cmd) => cmd.name);
+
+  settings.disabledCommands = commands.filter((cmd) => !data[cmd]);
+  settings.markModified("disabledCommands");
+
+  await settings.save();
+  res.redirect(303, `/manage/${guild.id}/commands`);
+});
+
+router.post("/:serverID/ticketpanels", CheckAuth, async (req, res) => {
+  // Check if the user has the permissions to edit this guild
+  const guild = req.client.guilds.cache.get(req.params.serverID);
+  if (
+    !guild ||
+    !req.userInfos.displayedGuilds ||
+    !req.userInfos.displayedGuilds.find((g) => g.id === req.params.serverID)
+  ) {
+    return res.render("404", {
+      user: req.userInfos,
+      currentURL: `${req.client.config.DASHBOARD.baseURL}/${req.originalUrl}`,
+    });
+  }
+
+  const settings = await getSettings(guild);
+  const data = req.body;
+
+  settings.ticketPanels.push({
+    name: data.name,
+    channel: data.channel,
+    role: JSON.parse(data.role),
+  });
+
+  guild.channels
+    .fetch(data.channel)
+    .then((ch) => {
+      if (ch) {
+        ch.send({
+          embeds: [
+            {
+              title: data.name,
+              description: "To create a new ticket, react with ✉️",
+              color: 0xc0c0c0,
+              footer: {
+                name: "AIO",
+              },
+              timestamp: new Date().getTime(),
+            },
+          ],
+          components: [
+            new MessageActionRow().addComponents(
+              new MessageButton()
+                .setEmoji("✉️")
+                .setStyle("SECONDARY")
+                .setCustomId("TICKET_CREATE_PANEL_" + encodeURIComponent(data.name))
+            ),
+          ],
+        });
+      }
+    })
+    .catch((e) => console.error(e));
+
+  settings.markModified("ticketPanels");
+  await settings.save();
+  res.redirect(303, `/manage/${guild.id}/ticketpanels`);
+});
+
+router.post("/:serverID/ticketpanels/send", CheckAuth, async (req, res) => {
+  // Check if the user has the permissions to edit this guild
+  const guild = req.client.guilds.cache.get(req.params.serverID);
+  if (
+    !guild ||
+    !req.userInfos.displayedGuilds ||
+    !req.userInfos.displayedGuilds.find((g) => g.id === req.params.serverID)
+  ) {
+    return res.render("404", {
+      user: req.userInfos,
+      currentURL: `${req.client.config.DASHBOARD.baseURL}/${req.originalUrl}`,
+    });
+  }
+
+  const settings = await getSettings(guild);
+  const data = req.body;
+
+  settings.ticketPanels.find((x) => x._id == data.id).channel = data.channel;
+
+  guild.channels
+    .fetch(data.channel)
+    .then((ch) => {
+      if (ch) {
+        ch.send({
+          embeds: [
+            {
+              title: settings.ticketPanels.find((x) => x._id == data.id).name,
+              description: "To create a new ticket, react with ✉️",
+              color: 0xc0c0c0,
+              footer: {
+                name: "AIO",
+              },
+              timestamp: new Date().getTime(),
+            },
+          ],
+          components: [
+            new MessageActionRow().addComponents(
+              new MessageButton()
+                .setEmoji("✉️")
+                .setStyle("SECONDARY")
+                .setCustomId(
+                  "TICKET_CREATE_PANEL_" + encodeURIComponent(settings.ticketPanels.find((x) => x._id == data.id).name)
+                )
+            ),
+          ],
+        });
+      }
+    })
+    .catch((e) => console.error(e));
+
+  settings.markModified("ticketPanels");
+  await settings.save();
+  res.redirect(303, `/manage/${guild.id}/ticketpanels`);
+});
+
+router.post("/:serverID/ticketpanels/delete", CheckAuth, async (req, res) => {
+  // Check if the user has the permissions to edit this guild
+  const guild = req.client.guilds.cache.get(req.params.serverID);
+  if (
+    !guild ||
+    !req.userInfos.displayedGuilds ||
+    !req.userInfos.displayedGuilds.find((g) => g.id === req.params.serverID)
+  ) {
+    return res.render("404", {
+      user: req.userInfos,
+      currentURL: `${req.client.config.DASHBOARD.baseURL}/${req.originalUrl}`,
+    });
+  }
+
+  const settings = await getSettings(guild);
+  const data = req.body;
+
+  settings.ticketPanels = settings.ticketPanels.filter((x) => x._id != data.id);
+
+  settings.markModified("ticketPanels");
+  await settings.save();
+  res.redirect(303, `/manage/${guild.id}/ticketpanels`);
+});
+
+router.post("/:serverID/ticketpanels/update", CheckAuth, async (req, res) => {
+  // Check if the user has the permissions to edit this guild
+  const guild = req.client.guilds.cache.get(req.params.serverID);
+  if (
+    !guild ||
+    !req.userInfos.displayedGuilds ||
+    !req.userInfos.displayedGuilds.find((g) => g.id === req.params.serverID)
+  ) {
+    return res.render("404", {
+      user: req.userInfos,
+      currentURL: `${req.client.config.DASHBOARD.baseURL}/${req.originalUrl}`,
+    });
+  }
+
+  const settings = await getSettings(guild);
+  const data = req.body;
+  settings.ticketPanels.find((x) => x._id == data.id).role = JSON.parse(data.role);
+
+  settings.markModified("ticketPanels");
+  await settings.save();
+  res.redirect(303, `/manage/${guild.id}/ticketpanels`);
 });
 
 module.exports = router;

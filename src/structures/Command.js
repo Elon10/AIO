@@ -1,8 +1,9 @@
-const { MessageEmbed } = require("discord.js");
+const { MessageEmbed, InteractionCollector } = require("discord.js");
 const { permissions, sendMessage, parsePermissions } = require("@utils/botUtils");
 const { EMBED_COLORS, PREFIX, OWNER_IDS } = require("@root/config.js");
 const { timeformat } = require("@utils/miscUtils");
 const CommandCategory = require("./CommandCategory");
+const { getSettings } = require("@schemas/Guild");
 
 class Command {
   /**
@@ -112,7 +113,9 @@ class Command {
    * @param {string} invoke
    * @param {string} prefix
    */
-  async executeCommand(message, args, invoke, prefix) {
+  async executeCommand(message, args, invoke, settings) {
+    let { prefix } = settings;
+
     // callback validations
     for (const validation of this.validations) {
       if (!validation.callback(message)) {
@@ -155,6 +158,10 @@ class Command {
       }
     }
 
+    if (settings?.disabledCommands?.includes(this.name)) {
+      return message.reply("This command is disabled by a server administrator!");
+    }
+
     try {
       await this.messageRun(message, args, invoke, prefix);
     } catch (ex) {
@@ -170,6 +177,8 @@ class Command {
    * @param {import('discord.js').CommandInteraction} interaction
    */
   async executeInteraction(interaction) {
+    let settings = await getSettings(interaction.guild);
+
     // callback validations
     for (const validation of this.validations) {
       if (!validation.callback(interaction)) {
@@ -219,11 +228,18 @@ class Command {
       }
     }
 
+    if (settings?.disabledCommands?.includes(interaction.commandName)) {
+      return interaction.reply({
+        content: "This command is disabled by a server administrator!",
+        ephemeral: true,
+      });
+    }
+
     try {
       await interaction.deferReply({ ephemeral: this.slashCommand.ephemeral });
       await this.interactionRun(interaction);
     } catch (ex) {
-      await (await interaction.followUp("Fetching that data for you!")).then(msg.delete)
+      await (await interaction.followUp("Fetching that data for you!")).then(msg.delete);
       this.client.logger.error("interactionRun", ex);
     } finally {
       this.applyCooldown(interaction.user.id);

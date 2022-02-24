@@ -113,7 +113,18 @@ const Schema = mongoose.Schema({
       thumbnail: Boolean,
       footer: String,
     },
-  }
+  },
+  disabledCommands: {
+    type: Array,
+    default: [],
+  },
+  ticketPanels: [
+    {
+      name: String,
+      channel: String,
+      role: [String],
+    },
+  ],
 });
 
 const Model = mongoose.model("guild", Schema);
@@ -131,7 +142,7 @@ module.exports = {
           region: guild.preferredLocale,
           owner: {
             id: guild.ownerId,
-            tag: guild.members.cache.get(guild.ownerId).user.tag,
+            tag: (await guild.members.fetch(guild.ownerId)).user.tag,
           },
           joinedAt: guild.joinedAt,
         },

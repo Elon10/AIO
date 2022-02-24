@@ -22,7 +22,7 @@ module.exports = async (client, message) => {
     // command is found
     if (cmd) {
       isCommand = true;
-      cmd.executeCommand(message, args, invoke, prefix);
+      cmd.executeCommand(message, args, invoke, settings);
     }
   }
 

@@ -1,4 +1,4 @@
-const { handleTicketOpen, handleTicketClose } = require("@src/handlers/ticket");
+const { handleTicketOpen, handleTicketClose, handleTicketOpenedByPanel } = require("@src/handlers/ticket");
 
 /**
  * @param {import('@src/structures').BotClient} client
@@ -31,6 +31,11 @@ module.exports = async (client, interaction) => {
     if (interaction.customId === "TICKET_CREATE") {
       await interaction.deferReply({ ephemeral: true });
       await handleTicketOpen(interaction);
+    }
+
+    if (interaction.customId.startsWith("TICKET_CREATE_PANEL_")) {
+      await interaction.deferReply({ ephemeral: true });
+      await handleTicketOpenedByPanel(interaction);
     }
 
     // ticket close
