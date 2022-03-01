@@ -15,7 +15,7 @@ router.get("/login", async function (req, res) {
       )}&state=${req.query.state || "no"}`
     );
   }
-  res.redirect("/selector");
+  res.redirect("/servers");
 });
 
 router.get("/callback", async (req, res) => {
@@ -27,7 +27,7 @@ router.get("/callback", async (req, res) => {
       return res.redirect("/manage/" + guildID);
     }
   }
-  const redirectURL = req.client.states[req.query.state] || "/selector";
+  const redirectURL = req.client.states[req.query.state] || "/servers";
   const params = new URLSearchParams();
   params.set("grant_type", "authorization_code");
   params.set("code", req.query.code);

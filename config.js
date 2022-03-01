@@ -1,5 +1,5 @@
 module.exports = {
-  OWNER_IDS: [658441101861978151], // Bot owner ID's
+  OWNER_IDS: ["263761253414076417", "658441101861978151"], // Bot owner ID's
   PREFIX: "!", // Default prefix for the bot
   SUPPORT_SERVER: "https://discord.gg/NVrDzMutnd", // Your bot support serve
   PRESENCE: {
@@ -10,8 +10,8 @@ module.exports = {
   },
   DASHBOARD: {
     enabled: true, // enable or disable dashboard
-    baseURL: "http://localhost:8080/", // base url
-    failureURL: "http://localhost:8080/", // failure redirect url
+    baseURL: "https://dashboard.aiodiscord.xyz/", // base url
+    failureURL: "https://dashboard.aiodiscord.xyz/error", // failure redirect url
     port: "8080", // port to run the bot on
   },
   INTERACTIONS: {

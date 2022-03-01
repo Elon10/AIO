@@ -257,8 +257,8 @@ function getSlashCategoryEmbeds(client, category) {
       const subCmds = cmd.slashCommand.options.filter((opt) => opt.type === "SUB_COMMAND");
       const subCmdsString = subCmds.map((s) => s.name).join(", ");
 
-      return `\`/${cmd.name}\`\n <:arow1:927668942502232074> **Description**: ${cmd.description}\n ${
-        subCmds == 0 ? "" : `<:arow1:927668942502232074> **SubCommands [${subCmds.length}]**: ${subCmdsString}\n`
+      return `\`/${cmd.name}\`\n <:arrow:948311928009261076> **Description**: ${cmd.description}\n ${
+        subCmds == 0 ? "" : `<:sub:948311942651592735> **SubCommands [${subCmds.length}]**: ${subCmdsString}\n`
       } `;
     });
 
