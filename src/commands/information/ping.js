@@ -41,7 +41,7 @@ module.exports = class PingCommand extends Command {
     }
 
     const embed = new MessageEmbed()
-      .setAuthor({ name: message.client.user.username, iconURL: message.client.user.avatarURL()})
+      .setAuthor('AIO')
       .addField("Strength", `${emoji}`, true)
       .addField("Response Time", `${ping}ms`,true)
       .addField("Comments",`${text}`,false)

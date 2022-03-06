@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 /* The switch - the box around the slider */
 .switch {
   position: relative;
