@@ -1,9 +1,8 @@
-const { MessageEmbed, InteractionCollector } = require("discord.js");
+const { MessageEmbed } = require("discord.js");
 const { permissions, sendMessage, parsePermissions } = require("@utils/botUtils");
 const { EMBED_COLORS, PREFIX, OWNER_IDS } = require("@root/config.js");
 const { timeformat } = require("@utils/miscUtils");
 const CommandCategory = require("./CommandCategory");
-const { getSettings } = require("@schemas/Guild");
 
 class Command {
   /**
@@ -113,8 +112,8 @@ class Command {
    * @param {string} invoke
    * @param {string} prefix
    */
-  async executeCommand(message, args, invoke, settings) {
-    let { prefix } = settings;
+  async executeCommand(message, args, invoke, prefix) {
+    if (!message.channel.permissionsFor(message.guild.me).has("SEND_MESSAGES")) return;
 
     // callback validations
     for (const validation of this.validations) {
@@ -136,7 +135,6 @@ class Command {
     }
 
     // bot permissions
-    if (!message.channel.permissionsFor(message.guild.me).has("SEND_MESSAGES")) return;
     if (this.botPermissions.length > 0) {
       if (!message.channel.permissionsFor(message.guild.me).has(this.botPermissions)) {
         return message.reply(`I need ${parsePermissions(this.botPermissions)} for this command`);
@@ -158,14 +156,10 @@ class Command {
       }
     }
 
-    if (settings?.disabledCommands?.includes(this.name)) {
-      return message.reply("This command is disabled by a server administrator!");
-    }
-
     try {
       await this.messageRun(message, args, invoke, prefix);
     } catch (ex) {
-      await message.channel.send("Fetching that data for you!");
+      await message.channel.send("Oops! An error occurred while running the command");
       this.client.logger.error("messageRun", ex);
     } finally {
       this.applyCooldown(message.author.id);
@@ -177,8 +171,6 @@ class Command {
    * @param {import('discord.js').CommandInteraction} interaction
    */
   async executeInteraction(interaction) {
-    let settings = await getSettings(interaction.guild);
-
     // callback validations
     for (const validation of this.validations) {
       if (!validation.callback(interaction)) {
@@ -228,18 +220,11 @@ class Command {
       }
     }
 
-    if (settings?.disabledCommands?.includes(interaction.commandName)) {
-      return interaction.reply({
-        content: "This command is disabled by a server administrator!",
-        ephemeral: true,
-      });
-    }
-
     try {
       await interaction.deferReply({ ephemeral: this.slashCommand.ephemeral });
       await this.interactionRun(interaction);
     } catch (ex) {
-      await (await interaction.followUp("Fetching that data for you!")).then(msg.delete);
+      await interaction.followUp("Oops! An error occurred while running the command");
       this.client.logger.error("interactionRun", ex);
     } finally {
       this.applyCooldown(interaction.user.id);
@@ -268,7 +253,7 @@ class Command {
     }
 
     const embed = new MessageEmbed().setColor(EMBED_COLORS.BOT_EMBED).setDescription(desc);
-    if (title) embed.setAuthor(title);
+    if (title) embed.setAuthor({ name: title });
     return embed;
   }
 
@@ -289,10 +274,10 @@ class Command {
     if (this.slashCommand.options.find((o) => o.type === "SUB_COMMAND")) {
       const subCmds = this.slashCommand.options.filter((opt) => opt.type === "SUB_COMMAND");
       subCmds.forEach((sub) => {
-        desc += `❯ \`${this.name} ${sub.name}\`: ${sub.description}\n`;
+        desc += `\`/${this.name} ${sub.name}\`\n❯ ${sub.description}\n\n`;
       });
     } else {
-      desc += `\`/${this.name}\`\n${this.description}\n`;
+      desc += `\`/${this.name}\`\n\n**Help:** ${this.description}`;
     }
 
     if (this.cooldown) {

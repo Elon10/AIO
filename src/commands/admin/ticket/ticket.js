@@ -79,6 +79,12 @@ module.exports = class Ticket extends Command {
                 required: true,
               },
               {
+                name: "description",
+                description: "description for the ticket embed",
+                type: "STRING",
+                required: true,
+              },
+              {
                 name: "role",
                 description: "the role's which can have access to newly opened tickets",
                 type: "ROLE",
@@ -244,6 +250,7 @@ module.exports = class Ticket extends Command {
     if (sub === "setup") {
       const channel = interaction.options.getChannel("channel");
       const title = interaction.options.getString("title");
+      const description = interaction.options.getString("title")
       const role = interaction.options.getRole("role");
       const color = interaction.options.getString("color");
 
@@ -260,7 +267,7 @@ module.exports = class Ticket extends Command {
         return interaction.followUp(`I need do not have permissions to send embeds in ${channel}`);
       }
 
-      response = await setupTicket(interaction.guild, channel, title, role, color);
+      response = await setupTicket(interaction.guild, channel, title, description, role, color);
     }
 
     // Log channel
@@ -314,7 +321,10 @@ async function runInteractiveSetup({ channel, guild, author }) {
 
   let targetChannel;
   let title;
+  let description;
+  let color;
   let role;
+
   try {
     // wait for channel
     await channel.send({
@@ -335,6 +345,14 @@ async function runInteractiveSetup({ channel, guild, author }) {
     reply = (await channel.awaitMessages({ filter, max: 1, time: SETUP_TIMEOUT })).first();
     if (reply.content.toLowerCase() === "cancel") return reply.reply("Ticket setup has been cancelled");
     title = reply.content;
+
+    await channel.send({ embeds: [embed.setDescription("Please enter the `description` of the ticket")] });
+    reply = (await channel.awaitMessages({ filter, max: 1, time: SETUP_TIMEOUT })).first();
+    if (reply.content.toLowerCase() === "cancel") return reply.reply("Ticket setup has been cancelled");
+    description = reply.content;
+
+
+    
 
     // wait for roles
     const desc =
@@ -366,11 +384,13 @@ async function runInteractiveSetup({ channel, guild, author }) {
   return channel.send(response);
 }
 
-async function setupTicket(guild, channel, title, role, color) {
+async function setupTicket(guild, channel, title, description, role, color) {
   try {
     const embed = new MessageEmbed()
       .setAuthor("Support Ticket")
-      .setDescription(title)
+      .setTitle(title)
+      .setDescription(description)
+      .setColor(color)
       .setFooter("You can only have 1 open ticket at a time!");
 
     if (color) embed.setColor(color);
@@ -382,7 +402,7 @@ async function setupTicket(guild, channel, title, role, color) {
     const tktMessage = await channel.send({ embeds: [embed], components: [row] });
 
     // save to Database
-    await createNewTicket(guild.id, channel.id, tktMessage.id, title, role?.id);
+    await createNewTicket(guild.id, channel.id, tktMessage.id, title, description, role?.id);
 
     // send success
     return "Configuration saved! Ticket message is now setup 🎉";

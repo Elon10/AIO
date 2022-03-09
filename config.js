@@ -4,9 +4,9 @@ module.exports = {
   SUPPORT_SERVER: "https://discord.gg/NVrDzMutnd", // Your bot support serve
   PRESENCE: {
     ENABLED: true, // Whether or not the bot should update its status
-    STATUS: "online", // The bot's status [online, idle, dnd, invisible]
-    TYPE: "WATCHING", // Status type for the bot [PLAYING | LISTENING | WATCHING | COMPETING]
-    MESSAGE: "{members} members in {servers} servers", // Your bot status message
+    STATUS: "idle", // The bot's status [online, idle, dnd, invisible]
+    TYPE: "PLAYING", // Status type for the bot [PLAYING | LISTENING | WATCHING | COMPETING]
+    MESSAGE: "❤ #Stand With Ukraine | Users: {members} | Servers: {servers}", // Your bot status message
   },
   DASHBOARD: {
     enabled: true, // enable or disable dashboard
@@ -28,7 +28,7 @@ module.exports = {
     DAILY_COINS: 100, // coins to be received by daily command
   },
   ECONOMY: {
-    CURRENCY: ":coin:",
+    CURRENCY: "<:icons_bank:950210456570695730>",
     DAILY_COINS: 500, // coins to be received by daily command
   },
   IMAGE: {

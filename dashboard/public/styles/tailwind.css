@@ -166,7 +166,7 @@ sup {
 table {
   text-indent: 0;
   /* 1 */
-  border-color: inherit;
+  border-color: blue;
   /* 2 */
   border-collapse: collapse;
   /* 3 */

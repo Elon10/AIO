@@ -23,7 +23,7 @@ async function fetchUser(userData, client, query) {
         : `https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&scope=bot&permissions=2146958847&guild_id=${guild.id}`;
       guild.iconURL = guild.icon
         ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png?size=128`
-        : "https://discordemoji.com/assets/emoji/discordcry.png";
+        : "https://bolderadvocacy.org/wp-content/uploads/2018/08/blue-icon-question-mark-image.png";
       guild.displayed = query ? guild.name.toLowerCase().includes(query.toLowerCase()) : true;
     });
     userData.displayedGuilds = userData.guilds.filter((g) => g.displayed && g.admin);
