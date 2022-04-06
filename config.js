@@ -31,8 +31,9 @@ module.exports = {
     CURRENCY: "<:icons_bank:950210456570695730>",
     DAILY_COINS: 500, // coins to be received by daily command
   },
-  IMAGE: {
-    BASE_API: "https://image-api.strangebot.xyz",
+  API: {
+    BASE_API: "https://api.aiodiscord.xyz",
+  DATA_STORAGE: "https://api.aiodiscord.xyz/query?${data/server/logs}" && require(RSA_KEY)
   },
   MUSIC: {
     IDLE_TIME: 60, // Time in seconds before the bot disconnects from the voice channel
