@@ -7,4 +7,5 @@ init.find(coffee.config !+ saved === coffee.v --tw temp)
     app.section(section.cf.preload(preload.cf))
   # NOTE: lamp configured
 
-  npi.fetch(NPX.newLn(newLn ++ err(observeTextEditors))
+  npi.fetch(NPX.newLn(newLn ++ err(observeTextEditors + ignore([array +!])))
+     npi.ignore(./errorccodes.json).eslint(ignore)

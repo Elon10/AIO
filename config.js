@@ -85,6 +85,6 @@ module.exports = {
     MEMBERS: 1000,
   },
   MESSAGES: {
-    API_ERROR: "Unexpected Backend Error! Try again later or contact support server",
+    API_ERROR: "Unexpected Backend Error! Try again later or contact support server - Error code - x015234 ",
   },
 };

@@ -41,7 +41,8 @@ module.exports = class ModLog extends Command {
 
     if (input === "none" || input === "off" || input === "disable") targetChannel = null;
     else {
-      if (message.mentions.channels.size === 0) return message.reply("Incorrect command usage");
+      if (message.mentions.channels.size === 0)
+        return message.reply("Incorrect command usage - please mention a channel");
       targetChannel = message.mentions.channels.first();
     }
 
@@ -63,7 +64,7 @@ async function setChannel(guild, targetChannel) {
 
   if (targetChannel) {
     if (!canSendEmbeds(targetChannel))
-      return "I cannot send logs to that channel! I need the `Write Messages` and `Embed Links` permissions in that channel";
+      return "I cannot send logs to that channel! I need the `Write Messages` and `Embed Links` permissions in that channel - please fix this and try again.";
   }
 
   settings.modlog_channel = targetChannel?.id;

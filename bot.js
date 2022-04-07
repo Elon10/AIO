@@ -1,7 +1,6 @@
 require("dotenv").config();
 require("module-alias/register");
 
-
 const path = require("path");
 const { startupCheck } = require("@utils/botUtils");
 const { BotClient } = require("@src/structures");
@@ -16,7 +15,7 @@ client.loadEvents("src/events");
 
 // catch client errors and warnings
 client.on("error", (err) => client.logger.error(`Client Error`, err));
-client.on("warn", (message) => client.logger.warn(`Client Warning: ${message}`));
+client.on("warn", (message) => client.logger.warn(`Client Warning - ${message}`));
 
 // find unhandled promise rejections
 process.on("unhandledRejection", (err) => {
