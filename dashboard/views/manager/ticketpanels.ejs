@@ -2,35 +2,20 @@
 <html>
 <%- include('../includes/head') %>
 
-  <body class="bg-gray-600 text-gray-50 min-h-screen flex flex-col">
-    <%- include('../includes/header') %>
+  <body class="bg-bggray text-gray-50 min-h-screen flex flex-col">
+    <div class="grid grid-cols-1 md:grid-cols-8 flex-1">
+      <%- include('../includes/sidebar') %>
 
-      <div class="grid grid-cols-1 md:grid-cols-6 flex-1">
-        <%- include('../includes/sidebar') %>
+      <div class="flex flex-col col-span-6 container">
+          <%- include('../includes/manageheader') %>
+            <h2 class="text-3xl font-semibold underline mx-8 mt-6 mb-2">Ticket panels</h2>
 
-          <div class="flex flex-col col-span-5 lg:pr-16 px-4 lg:px-0">
-            <section
-              class="flex flex-col md:flex-row items-center w-full justify-between pr-4 py-4 border-b border-b-gray-50">
-              <h3 class="text-lg font-medium">Ticket panels</h3>
-              <ol class="flex flex-row items-center space-x-4">
-                <li>
-                  <a href="/"><i class="fa fa-home mr-2"></i>Selector</a>
-                </li>
-                <i class="fa fa-angle-right"></i>
-                <li><a href="<%=`/manage/${guild.id}/`%>">
-                    <%=guild.name%>
-                  </a></li>
-                <i class="fa fa-angle-right"></i>
-                <li class="underline">Ticket panels</li>
-              </ol>
-            </section>
-
-            <section class="grid grid-cols-1 gap-4 my-4">
-              <div class="flex flex-col rounded-lg border border-gray-50 h-[fit-content]">
-                <div class="border-b border-b-gray-50 p-4">
-                  <h3 class="font-semibold">Add ticket panel</h3>
+            <section class="grid grid-cols gap-4 my-4 mx-8">
+              <div class="flex flex-col rounded-lg bg-darkerbggray h-[fit-content]">
+                <div class="p-4">
+                  <h3 class="font-semibold text-xl">Add ticket panel</h3>
                 </div>
-                <form role="form" action="/manage/<%= guild.id %>/ticketpanels/" method="POST" class="p-4">
+                <form role="form" action="/manage/<%= guild.id %>/ticketpanels/" method="POST" class="flex flex-col px-4 pt-2 pb-4">
                   <div class="flex flex-row items-center space-x-4">
                     <div class="flex flex-col flex-1">
                       <label>Name:</label>
@@ -60,18 +45,18 @@
                     </div>
                   </div>
                   <button type="submit" name="ticketPanelsAdd"
-                    class="px-3 py-1 rounded-md flex-1 mt-4 bg-cyan-700 transition-opacity duration-300 hover:opacity-70">
+                    class="px-3 py-1 rounded-md flex-1 mt-4 bg-primary transition-opacity duration-300 hover:opacity-70">
                     Add
                   </button>
                 </form>
               </div>
 
-              <div class="flex flex-col rounded-lg border border-gray-50 h-[fit-content]">
-                <div class="border-b border-b-gray-50 p-4">
-                  <h3 class="font-semibold">Configure ticket panels</h3>
+          <div class="flex flex-col rounded-lg bg-darkerbggray h-[fit-content]">
+                <div class="p-4">
+                  <h3 class="font-semibold text-xl">Configure ticket panels</h3>
                 </div>
-                  <% guild?.ticketPanels?.map(ticketPanel => { %>
-                  <div class="p-4 rounded-lg bg-white/5">
+                <% guild?.ticketPanels?.map(ticketPanel=> { %>
+                  <div class="px-4 pt-2 pb-4 rounded-lg">
                     <div class="flex flex-row items-center space-x-8">
                       <div class="flex flex-col min-w-[4rem] mr-16">
                         <span class="text-lg font-semibold">
@@ -82,7 +67,8 @@
                       <div class="flex flex-1">
                         <div class="flex flex-col w-full">
                           <label>Channel:</label>
-                          <form role="form" action="/manage/<%= guild.id %>/ticketpanels/send" method="POST" class="flex flex-row items-center">
+                          <form role="form" action="/manage/<%= guild.id %>/ticketpanels/send" method="POST"
+                            class="flex flex-row items-center">
                             <select name="channel" class="px-3 py-1 rounded-md bg-gray-50 text-gray-900 w-full">
                               <% guild.channels.cache.filter((ch)=> ch.type === "GUILD_TEXT").forEach((ch) => { %>
                                 <option value="<%= ch.id %>" <% if(ticketPanel.channel===ch.id) { %> selected="selected"
@@ -92,7 +78,7 @@
                             </select>
                             <input type="hidden" name="id" value="<%= ticketPanel._id %>">
                             <button type="submit" name="ticketPanelsSend"
-                              class="px-3 py-1 rounded-md flex-1 bg-cyan-700 transition-opacity duration-300 hover:opacity-70 ml-2 min-w-fit">
+                              class="px-3 py-1 rounded-md flex-1 bg-primary transition-opacity duration-300 hover:opacity-70 ml-2 min-w-fit">
                               Send & Update
                             </button>
                           </form>
@@ -101,23 +87,26 @@
 
                       <div class="flex flex-col flex-1">
                         <label>Role:</label>
-                        <form role="form" action="/manage/<%= guild.id %>/ticketpanels/update" method="POST" class="flex flex-row items-center">
+                        <form role="form" action="/manage/<%= guild.id %>/ticketpanels/update" method="POST"
+                          class="flex flex-row items-center">
                           <select name="role" data-search="true" data-silent-initial-value-set="true" multiple>
                             <% guild.roles.cache.filter((role)=> role.id !== guild.id).forEach((role) => { %>
-                              <option value="<%= role.id %>" <% if(ticketPanel.role.includes(role.id)) { %> selected="selected" <% } %> >
-                                <%= role.name %>
+                              <option value="<%= role.id %>" <% if(ticketPanel.role.includes(role.id)) { %>
+                                selected="selected" <% } %> >
+                                  <%= role.name %>
                               </option>
                               <% }); %>
                           </select>
 
                           <input type="hidden" name="id" value="<%= ticketPanel._id %>">
                           <button type="submit" name="ticketPanelsAdd"
-                            class="px-3 py-1 rounded-md flex-[1/2] ml-2 bg-cyan-700 transition-opacity duration-300 hover:opacity-70">
+                            class="px-3 py-1 rounded-md flex-[1/2] ml-2 bg-primary transition-opacity duration-300 hover:opacity-70">
                             Update
                           </button>
                         </form>
                       </div>
-                      <form role="form" action="/manage/<%= guild.id %>/ticketpanels/delete" method="POST" class="flex flex-row items-center flex-[1/2]">
+                      <form role="form" action="/manage/<%= guild.id %>/ticketpanels/delete" method="POST"
+                        class="flex flex-row items-center flex-[1/2]">
                         <input type="hidden" name="id" value="<%= ticketPanel._id %>">
                         <button type="submit" name="ticketPanelsAdd"
                           class="px-3 py-1 rounded-md flex-[1/2] mt-4 bg-red-700 transition-opacity duration-300 hover:opacity-70">
@@ -125,21 +114,21 @@
                         </button>
                       </form>
                     </div>
-                    </div>
-                  <% }) %>
                   </div>
+                  <% }) %>
+              </div>
             </section>
-          </div>
-      </div>
-      <%- include('../includes/footer') %>
-        <script defer>
-          VirtualSelect.init({
-            ele: 'select[name="role"]',
-            setValueAsArray: true,
-            additionalClasses: "h-[32px] rounded-md bg-gray-50 text-gray-900",
-            optionHeight: 32,
-          });
-        </script>
+            <%- include('../includes/footer') %>
+        </div>
+    </div>
+      <script defer>
+        VirtualSelect.init({
+          ele: 'select[name="role"]',
+          setValueAsArray: true,
+          additionalClasses: "h-[32px] rounded-md bg-gray-50 text-gray-900",
+          optionHeight: 32,
+        });
+      </script>
   </body>
 
 </html>

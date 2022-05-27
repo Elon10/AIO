@@ -2,35 +2,26 @@
 <html>
   <%- include('../includes/head') %>
 
-  <body class="bg-gray-600 text-gray-50 min-h-screen flex flex-col">
-    <%- include('../includes/header') %>
-
-    <div class="grid grid-cols-1 md:grid-cols-6 flex-1">
+  <body class="bg-bggray text-gray-50 min-h-screen flex flex-col">
+    <div class="grid grid-cols-1 md:grid-cols-8 flex-1">
       <%- include('../includes/sidebar') %>
 
-      <div class="flex flex-col col-span-5 lg:pr-16 px-4 lg:px-0">
-        <section
-          class="flex flex-col md:flex-row items-center w-full justify-between pr-4 py-4 border-b border-b-gray-50"
-        >
-          <h3 class="text-lg font-medium">Management</h3>
-          <ol class="flex flex-row items-center space-x-4">
-            <li>
-              <a href="/"><i class="fa fa-home mr-2"></i>Servers</a>
-            </li>
-            <i class="fa fa-angle-right"></i>
-            <li><a href="<%=`/manage/${guild.id}/`%>"> <%=guild.name%> </a></li>
-            <i class="fa fa-angle-right"></i>
-            <li class="underline">Management</li>
-          </ol>
-        </section>
+      <div class="flex flex-col col-span-6 container">
+        <%- include('../includes/manageheader') %>
+        <h2 class="text-3xl font-semibold underline mx-8 mt-6 mb-2">Management</h2>
 
-        <section class="grid grid-cols lg:grid-cols-2 gap-4 my-4">
+        <section class="grid grid-cols gap-4 my-4 mx-8 relative">
           <!-- BASIC CONFIGURATION -->
-          <div class="flex flex-col rounded-lg border border-gray-50 h-[fit-content]">
-            <div class="border-b border-b-gray-50 p-4">
-              <h3 class="font-semibold">General Configuration</h3>
+          <div class="flex flex-col rounded-lg bg-darkerbggray h-[fit-content]">
+            <div class="p-4">
+              <h3 class="font-semibold text-xl">General Configuration</h3>
             </div>
-            <form role="form" action="/manage/<%= guild.id %>/basic/" method="POST" class="flex flex-col p-4">
+            <form
+              role="form"
+              action="/manage/<%= guild.id %>/basic/"
+              method="POST"
+              class="flex flex-col px-4 pt-2 pb-4"
+            >
               <div class="flex flex-col">
                 <label>Prefix:</label>
                 <input
@@ -42,19 +33,28 @@
               </div>
               <div class="flex flex-col mt-2">
                 <div class="flex items-center">
-                  <label>
+                  <label class="inline-flex items-center">
                     <% if(guild.ranking.enabled) { %>
-                    <input type="checkbox" name="ranking" class="mr-1" checked />Ranking <% } else { %>
-                    <input type="checkbox" name="ranking" class="mr-1" />Ranking <% } %>
+                    <input type="checkbox" name="ranking" class="custom-checkbox" checked /><span class="ml-1"
+                      >Ranking </span
+                    ><% } else { %> <input type="checkbox" name="ranking" class="custom-checkbox" /><span class="ml-1"
+                      >Ranking </span
+                    ><% } %>
                   </label>
                 </div>
               </div>
               <div class="flex flex-col mt-2">
                 <div class="flex items-center">
-                  <label>
+                  <label class="inline-flex items-center">
                     <% if(guild.flag_translation?.enabled) { %>
-                    <input type="checkbox" name="flag_translation" class="mr-1" checked />Flag Translation <% } else {
-                    %> <input type="checkbox" name="flag_translation" class="mr-1" />Flag Translation <% } %>
+                    <input type="checkbox" name="flag_translation" class="custom-checkbox" checked /><span class="ml-1"
+                      >Flag Translation</span
+                    >
+                    <% } else { %> <input type="checkbox" name="flag_translation" class="custom-checkbox" /><span
+                      class="ml-1"
+                      >Flag Translation</span
+                    >
+                    <% } %>
                   </label>
                 </div>
               </div>
@@ -79,7 +79,7 @@
                 <button
                   type="submit"
                   name="basicUpdate"
-                  class="px-3 py-1 rounded-md bg-cyan-700 transition-opacity duration-300 hover:opacity-70"
+                  class="px-3 py-1 rounded-md bg-primary transition-opacity duration-300 hover:opacity-70"
                 >
                   Update
                 </button>
@@ -87,12 +87,16 @@
             </form>
           </div>
 
-          <!-- TICKET CONFIGURATION -->
-          <div class="flex flex-col rounded-lg border border-gray-50 h-[fit-content]">
-            <div class="border-b border-b-gray-50 p-4">
-              <h3 class="font-semibold">Ticket Configuration</h3>
+          <div class="flex flex-col rounded-lg bg-darkerbggray h-[fit-content]">
+            <div class="p-4">
+              <h3 class="font-semibold text-xl">Ticket Configuration</h3>
             </div>
-            <form role="form" action="/manage/<%= guild.id %>/basic/" method="POST" class="flex flex-col p-4">
+            <form
+              role="form"
+              action="/manage/<%= guild.id %>/basic/"
+              method="POST"
+              class="flex flex-col px-4 pt-2 pb-4"
+            >
               <div class="flex flex-col">
                 <label>Ticket Limit:</label>
                 <input
@@ -123,7 +127,7 @@
                 <button
                   type="submit"
                   name="ticketUpdate"
-                  class="px-3 py-1 rounded-md bg-cyan-700 transition-opacity duration-300 hover:opacity-70"
+                  class="px-3 py-1 rounded-md bg-primary transition-opacity duration-300 hover:opacity-70"
                 >
                   Update
                 </button>
@@ -132,23 +136,33 @@
           </div>
 
           <!-- INVITE CONFIGURATION -->
-          <div class="flex flex-col rounded-lg border border-gray-50 h-[fit-content]">
-            <div class="border-b border-b-gray-50 p-4">
-              <h3 class="font-semibold">Invite Configuration</h3>
+          <div class="flex flex-col rounded-lg bg-darkerbggray h-[fit-content]">
+            <div class="p-4">
+              <h3 class="font-semibold text-xl">Invite Configuration</h3>
             </div>
-            <form role="form" action="/manage/<%= guild.id %>/basic/" method="POST" class="flex flex-col p-4">
+            <form
+              role="form"
+              action="/manage/<%= guild.id %>/basic/"
+              method="POST"
+              class="flex flex-col px-4 pt-2 pb-4"
+            >
               <div class="flex items-center">
-                <label>
+                <label class="inline-flex items-center">
                   <% if(guild.invite.tracking) { %>
-                  <input type="checkbox" name="tracking" class="mr-1" checked />Invite Tracking <% } else { %>
-                  <input type="checkbox" name="tracking" class="mr-1" />Invite Tracking <% } %>
+                  <input type="checkbox" name="tracking" class="custom-checkbox" checked /><span class="ml-1"
+                    >Invite Tracking</span
+                  >
+                  <% } else { %> <input type="checkbox" name="tracking" class="custom-checkbox" /><span class="ml-1"
+                    >Invite Tracking</span
+                  >
+                  <% } %>
                 </label>
               </div>
               <div class="mt-4">
                 <button
                   type="submit"
                   name="inviteUpdate"
-                  class="px-3 py-1 rounded-md bg-cyan-700 transition-opacity duration-300 hover:opacity-70"
+                  class="px-3 py-1 rounded-md bg-primary transition-opacity duration-300 hover:opacity-70"
                 >
                   Update
                 </button>
@@ -157,11 +171,16 @@
           </div>
 
           <!-- AUTOMOD CONFIGURATION -->
-          <div class="flex flex-col rounded-lg border border-gray-50 h-[fit-content]">
-            <div class="border-b border-b-gray-50 p-4">
-              <h3 class="font-semibold">Automod Configuration</h3>
+          <div class="flex flex-col rounded-lg bg-darkerbggray h-[fit-content]">
+            <div class="p-4">
+              <h3 class="font-semibold text-xl">Automod Configuration</h3>
             </div>
-            <form role="form" action="/manage/<%= guild.id %>/basic/" method="POST" class="flex flex-col p-4">
+            <form
+              role="form"
+              action="/manage/<%= guild.id %>/basic/"
+              method="POST"
+              class="flex flex-col px-4 pt-2 pb-4"
+            >
               <div class="flex flex-col">
                 <label>Max Strikes:</label>
                 <input
@@ -213,31 +232,33 @@
               </div>
               <div class="flex flex-col">
                 <div class="flex items-center mt-2">
-                  <label>
+                  <label class="inline-flex items-center">
                     <% if(guild.automod.anti_links) { %>
-                    <input type="checkbox" name="anti_links" class="mr-1" checked />Anti Links <% } else { %>
-                    <input type="checkbox" name="anti_links" class="mr-1" />Anti Links <% } %>
+                    <input type="checkbox" name="anti_links" class="custom-checkbox mr-1" checked />Anti Links <% } else
+                    { %> <input type="checkbox" name="anti_links" class="custom-checkbox mr-1" />Anti Links <% } %>
                   </label>
                 </div>
                 <div class="flex items-center mt-2">
-                  <label>
+                  <label class="inline-flex items-center">
                     <% if(guild.automod.anti_scam) { %>
-                    <input type="checkbox" name="anti_scam" class="mr-1" checked />Anti Scam <% } else { %>
-                    <input type="checkbox" name="anti_scam" class="mr-1" />Anti Scam <% } %>
+                    <input type="checkbox" name="anti_scam" class="custom-checkbox mr-1" checked />Anti Scam <% } else {
+                    %> <input type="checkbox" name="anti_scam" class="custom-checkbox mr-1" />Anti Scam <% } %>
                   </label>
                 </div>
                 <div class="flex items-center mt-2">
-                  <label>
+                  <label class="inline-flex items-center">
                     <% if(guild.automod.anti_invites) { %>
-                    <input type="checkbox" name="anti_invites" class="mr-1" checked />Anti Invites <% } else { %>
-                    <input type="checkbox" name="anti_invites" class="mr-1" />Anti Invites <% } %>
+                    <input type="checkbox" name="anti_invites" class="custom-checkbox mr-1" checked />Anti Invites <% }
+                    else { %> <input type="checkbox" name="anti_invites" class="custom-checkbox mr-1" />Anti Invites <%
+                    } %>
                   </label>
                 </div>
                 <div class="flex items-center mt-2">
-                  <label>
+                  <label class="inline-flex items-center">
                     <% if(guild.automod.anti_ghostping) { %>
-                    <input type="checkbox" name="anti_ghostping" class="mr-1" checked />Anti Ghostping <% } else { %>
-                    <input type="checkbox" name="anti_ghostping" class="mr-1" />Anti Ghostping <% } %>
+                    <input type="checkbox" name="anti_ghostping" class="custom-checkbox mr-1" checked />Anti Ghostping
+                    <% } else { %> <input type="checkbox" name="anti_ghostping" class="custom-checkbox mr-1" />Anti
+                    Ghostping <% } %>
                   </label>
                 </div>
               </div>
@@ -245,7 +266,7 @@
                 <button
                   type="submit"
                   name="automodUpdate"
-                  class="px-3 py-1 rounded-md bg-cyan-700 transition-opacity duration-300 hover:opacity-70"
+                  class="px-3 py-1 rounded-md bg-primary transition-opacity duration-300 hover:opacity-70"
                 >
                   Update
                 </button>
@@ -253,8 +274,8 @@
             </form>
           </div>
         </section>
+        <%- include('../includes/footer') %>
       </div>
     </div>
-    <%- include('../includes/footer') %>
   </body>
 </html>
