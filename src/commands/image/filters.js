@@ -4,7 +4,7 @@ const { getBuffer } = require("@utils/httpUtils");
 const { getImageFromCommand, getFilter } = require("@utils/imageUtils");
 const { EMBED_COLORS } = require("@root/config.js");
 
-const availableFilters = ["blur", "burn", "gay", "greyscale", "invert", "pixelate", "sepia", "sharpen"];
+const availableFilters = ["blur", "burn", "pride", "greyscale", "invert", "pixelate", "sepia", "sharpen"];
 
 module.exports = class Filters extends Command {
   constructor(client) {

@@ -64,6 +64,11 @@ module.exports = {
     image: "https://cdn.discordapp.com/attachments/945112333666099230/945121474988089404/social.gif",
     emoji: "🫂",
   },
+  SUGGESTION: {
+  name: "Suggestion",
+  image: "https://cdn-icons-png.flaticon.com/512/1484/1484815.png",
+  emoji: "📝",
+  },
   TICKET: {
     name: "Ticket",
     image: "https://cdn.discordapp.com/attachments/945112333666099230/945122189496188948/ticket.gif",

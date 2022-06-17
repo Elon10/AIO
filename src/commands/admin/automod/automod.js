@@ -285,9 +285,8 @@ async function antiInvites(settings, input) {
   const status = input.toUpperCase() === "ON" ? true : false;
   settings.automod.anti_invites = status;
   await settings.save();
-  return `Messages ${
-    status ? "with discord invites will now be automatically deleted" : "will not be filtered for discord invites now"
-  }`;
+  return `Messages ${status ? "with discord invites will now be automatically deleted" : "will not be filtered for discord invites now"
+    }`;
 }
 
 async function antilinks(settings, input) {
@@ -310,11 +309,10 @@ async function maxLines(settings, input) {
 
   settings.automod.max_lines = lines;
   await settings.save();
-  return `${
-    input === 0
-      ? "Maximum line limit is disabled"
-      : `Messages longer than \`${input}\` lines will now be automatically deleted`
-  }`;
+  return `${input === 0
+    ? "Maximum line limit is disabled"
+    : `Messages longer than \`${input}\` lines will now be automatically deleted`
+    }`;
 }
 
 async function maxMentions(settings, input) {
@@ -323,22 +321,19 @@ async function maxMentions(settings, input) {
 
   settings.automod.max_mentions = mentions;
   await settings.save();
-  return `${
-    input === 0
-      ? "Maximum user mentions limit is disabled"
-      : `Messages having more than \`${input}\` user mentions will now be automatically deleted`
-  }`;
+  return `${input === 0
+    ? "Maximum user mentions limit is disabled"
+    : `Messages having more than \`${input}\` user mentions will now be automatically deleted`
+    }`;
 }
-
 async function maxRoleMentions(settings, input) {
   const mentions = Number.parseInt(input);
   if (isNaN(mentions)) return "Please enter a valid number input";
 
   settings.automod.max_role_mentions = mentions;
   await settings.save();
-  return `${
-    input === 0
-      ? "Maximum role mentions limit is disabled"
-      : `Messages having more than \`${input}\` role mentions will now be automatically deleted`
-  }`;
+  return `${input === 0
+    ? "Maximum role mentions limit is disabled"
+    : `Messages having more than \`${input}\` role mentions will now be automatically deleted`
+    }`;
 }

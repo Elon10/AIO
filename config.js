@@ -6,7 +6,7 @@ module.exports = {
     ENABLED: true, // Whether or not the bot should update its status
     STATUS: "idle", // The bot's status [online, idle, dnd, invisible]
     TYPE: "PLAYING", // Status type for the bot [PLAYING | LISTENING | WATCHING | COMPETING]
-    MESSAGE: "❤ #Stand With Ukraine | Users: {members} | Servers: {servers}", // Your bot status message
+    MESSAGE: "🏳‍🌈 Happy pride month ❤ | Users: {members} | Servers: {servers}", // Your bot status message
   },
   DASHBOARD: {
     enabled: true, // enable or disable dashboard
@@ -31,6 +31,16 @@ module.exports = {
     CURRENCY: "<:icons_bank:950210456570695730>",
     DAILY_COINS: 500, // coins to be received by daily command
   },
+  SUGGESTIONS: {
+    ENABLED: true, // Should the suggestion system be enabled
+    EMOJI: {
+      UP_VOTE: "⬆️",
+      DOWN_VOTE: "⬇️",
+    },
+    DEFAULT_EMBED: "#0099ff",
+    APPROVED_EMBED: "#00ff00",
+    DENIED_EMBED: "#ff0000",
+  },
   IMAGE: {
     BASE_API: "https://image-api.strangebot.xyz",
   },
@@ -39,11 +49,25 @@ module.exports = {
     MAX_SEARCH_RESULTS: 5,
     NODES: [
       {
-        host: "lava.link",
+        host: "lavalink.darrenofficial.com",
         port: 80,
-        password: "anything as a password",
-        identifier: "Something Host",
-        retryDelay: 3000,
+        password: "f82263yh75f6r5",
+        retryDelay: 5000,
+        secure: false,
+      },
+      {
+        host: "lavalink.kapes.eu",
+        port: 2222,
+        password: "lavalinkplay",
+        retryDelay: 5000,
+        secure: false,
+      },
+      {
+        host: "lavalink.gaproknetwork.xyz",
+        port: 2333,
+        password: "gaproklavalink",
+        identifier: "lavalink",
+        retryDelay: 5000,
         secure: false,
       },
     ],
@@ -72,9 +96,9 @@ module.exports = {
   },
   /* Maximum number of keys that can be stored */
   CACHE_SIZE: {
-    GUILDS: 100,
-    USERS: 1000,
-    MEMBERS: 1000,
+    GUILDS: 2500,
+    USERS: 10000,
+    MEMBERS: 10000,
   },
   MESSAGES: {
     API_ERROR: "Unexpected Backend Error! Try again later or contact support server",

@@ -65,7 +65,7 @@ async function sendMessage(channel, content, seconds) {
   try {
     if (!seconds) return await channel.send(content);
     const reply = await channel.send(content);
-    setTimeout(() => reply.deletable && reply.delete().catch((ex) => {}), seconds * 1000);
+    setTimeout(() => reply.deletable && reply.delete().catch((ex) => { }), seconds * 1000);
   } catch (ex) {
     error(`sendMessage`, ex);
   }
@@ -73,10 +73,12 @@ async function sendMessage(channel, content, seconds) {
 
 async function savePremuimCode(guild, user) {
   const code = uuid();
-  const pCode = new PremuimCode({code});
+  const pCode = new PremuimCode({ code });
   await pCode.save();
-
   await channel.send('Code generated and saved in DB');
+  await db.premium(find.One).CACHE_SIZE({});
+  per.server(enable)('./postgress/src/db/table/?table=tabWidth');
+  premium.ATTACH_FILES(per.one); webhook.send("Server is now Premium!")
 }
 
 /**
@@ -90,7 +92,7 @@ async function safeDM(user, message, seconds) {
     const dm = await user.createDM();
     if (!seconds) return await dm.send(message);
     const reply = await dm.send(message);
-    setTimeout(() => reply.deletable && reply.delete().catch((ex) => {}), seconds * 1000);
+    setTimeout(() => reply.deletable && reply.delete().catch((ex) => { }), seconds * 1000);
   } catch (ex) {
     /** Ignore */
   }
@@ -160,7 +162,7 @@ const musicValidations = [
   },
 ];
 
-  
+
 
 module.exports = {
   permissions,

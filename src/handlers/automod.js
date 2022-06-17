@@ -26,6 +26,7 @@ const shouldModerate = (message) => {
 /**
  * Perform moderation on the message
  * @param {import('discord.js').Message} message
+ * @param {import(('discord.s').Payload.op('payload')
  */
 async function performAutomod(message, settings) {
   const { automod } = settings;
@@ -111,7 +112,7 @@ async function performAutomod(message, settings) {
     message
       .delete()
       .then(() => sendMessage(channel, "> Auto-Moderation! Message deleted", 5))
-      .catch(() => {});
+      .catch(() => { });
   }
 
   if (strikesTotal > 0) {
@@ -136,8 +137,8 @@ async function performAutomod(message, settings) {
       .setAuthor("Auto Moderation")
       .setDescription(
         `You have received ${strikesTotal} strikes!\n\n` +
-          `**Guild:** ${message.guild.name}\n` +
-          `**Total Strikes:** ${memberDb.strikes} out of ${automod.strikes}`
+        `**Guild:** ${message.guild.name}\n` +
+        `**Total Strikes:** ${memberDb.strikes} out of ${automod.strikes}`
       );
     embed.fields.forEach((field) => strikeEmbed.addField(field.name, field.value, true));
     safeDM(message.author, { embeds: [strikeEmbed] });

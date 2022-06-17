@@ -85,7 +85,7 @@ async function closeTicket(channel, closedBy, reason) {
 
     if (channel.deletable) await channel.delete();
 
-    const embed = new MessageEmbed().setAuthor("Ticket Closed").setColor(EMBED_COLORS.TICKET_CLOSE);
+    const embed = new MessageEmbed().setAuthor({ name: "Ticket Closed" }).setColor(EMBED_COLORS.TICKET_CLOSE);
     if (reason) embed.addField("Reason", reason, false);
     embed
       .setDescription(`**Title:** ${ticketDetails.title}`)
@@ -136,7 +136,7 @@ async function closeAllTickets(guild, author) {
  * @param {import('discord.js').User} user
  * @param {Object} config
  */
-async function openTicket(guild, user, config, roles = []) {
+async function openTicket(guild, user, config) {
   if (!guild.me.permissions.has(OPEN_PERMS)) return "MISSING_PERMISSIONS";
 
   const alreadyExists = getExistingTicketChannel(guild, user.id);
@@ -161,16 +161,16 @@ async function openTicket(guild, user, config, roles = []) {
         id: guild.me.roles.highest.id,
         allow: ["VIEW_CHANNEL", "SEND_MESSAGES", "READ_MESSAGE_HISTORY"],
       },
-      ...roles.map((r) => ({ id: r, allow: ["VIEW_CHANNEL", "SEND_MESSAGES", "READ_MESSAGE_HISTORY"] })),
     ];
 
-    if (config.support_roles.length > 0) {
-      config.support_roles.forEach((role) => {
+    for (const roleId of config.support_roles) {
+      const role = guild.roles.cache.get(roleId);
+      if (role) {
         permissionOverwrites.push({
           id: role,
           allow: ["VIEW_CHANNEL", "SEND_MESSAGES", "READ_MESSAGE_HISTORY"],
         });
-      });
+      }
     }
 
     const tktChannel = await guild.channels.create(`tіcket-${ticketNumber}`, {
@@ -180,11 +180,11 @@ async function openTicket(guild, user, config, roles = []) {
     });
 
     const embed = new MessageEmbed()
-      .setAuthor(`Ticket #${ticketNumber}`)
+      .setAuthor({ name: `Ticket #${ticketNumber}` })
       .setDescription(
         `Hello ${user.toString()}\nSupport will be with you shortly\n\n**Ticket Reason:**\n${config.title}`
       )
-      .setFooter("You may close your ticket anytime by clicking the button below");
+      .setFooter({ text: "You may close your ticket anytime by clicking the button below" });
 
     let buttonsRow = new MessageActionRow().addComponents(
       new MessageButton().setLabel("Close Ticket").setCustomId("TICKET_CLOSE").setEmoji("🔒").setStyle("PRIMARY")
@@ -194,7 +194,7 @@ async function openTicket(guild, user, config, roles = []) {
 
     const dmEmbed = new MessageEmbed()
       .setColor(EMBED_COLORS.TICKET_CREATE)
-      .setAuthor("Ticket Created")
+      .setAuthor({ name: "Ticket Created" })
       .setThumbnail(guild.iconURL())
       .setDescription(`**Server:** ${guild.name}\n**Title:** ${config.title}`);
 

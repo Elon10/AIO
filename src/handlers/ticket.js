@@ -40,6 +40,7 @@ async function handleTicketOpenedByPanel(interaction) {
   const name = decodeURIComponent(interaction.customId.replace("TICKET_CREATE_PANEL_", ""));
   const description = decodeURIComponent(interaction.customId.replace("TICKET_CREATE_PANEL_", ""))
   const config = settings.ticketPanels.find((panel) => panel.channel === interaction.channelId && panel.name === name);
+  
 
   const status = await openTicket(
     interaction.guild,

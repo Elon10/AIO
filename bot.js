@@ -1,5 +1,6 @@
 require("dotenv").config();
 require("module-alias/register");
+const chalk = require("chalk")
 
 
 const path = require("path");
@@ -38,3 +39,12 @@ process.on("unhandledRejection", (err) => {
   await client.initializeMongoose();
   await client.login(process.env.BOT_TOKEN);
 })();
+
+console.log(`
+CPU: ${chalk.red('90%')}
+RAM: ${chalk.green('40%')}
+DISK: ${chalk.yellow('70%')}
+`);
+
+console.log(chalk.red('FLUSING EVENTS for %20 -> %70'));
+console.log(chalk.yellow('EVT', '!EVENTS', 'TWCFG', 'NSPM', 'biz', 'baz'));

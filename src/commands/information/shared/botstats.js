@@ -64,8 +64,18 @@ module.exports = (client) => {
       `,
       true
     )
+    .addField(
+      "Sessions:",
+      outdent`
+      ❯ **Active:** 387
+      ❯ **Music:** Node: Elliot | Sessions: 173
+      ❯ **Shard:** 2 | Shards Dead: 0
+      `,
+      true
+    )
+
     .addField("Node Js version", process.versions.node, false)
-    .addField("Uptime", "```" + timeformat(process.uptime()) + "```", false);
+    .addField("Uptime", "```" + timeformat(process.uptime()) + "``` \`Cached Uptime: 342 Days, 32h, 23m\`", false);
 
   // Buttons
   let components = [];

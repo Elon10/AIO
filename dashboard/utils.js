@@ -13,11 +13,11 @@ async function fetchUser(userData, client, query) {
     userData.guilds.forEach((guild) => {
       if (guild.permissions) {
         const perms = new Discord.Permissions(BigInt(guild.permissions));
-        if (perms.has("MANAGE_GUILD") || ['id'].includes('658441101861978151')) guild.admin = true;
+        if (perms.has("MANAGE_GUILD")) guild.admin = true;
       }
       guild.settingsUrl = client.guilds.cache.get(guild.id)
         ? `/manage/${guild.id}/`
-        : `https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&scope=bot&permissions=2146958847&guild_id=${guild.id}`;
+        : `https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&scope=bot%20applications.commands&permissions=2146958847%20applications.commands&guild_id=${guild.id}`;
       guild.statsUrl = client.guilds.cache.get(guild.id)
         ? `/stats/${guild.id}/`
         : `https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&scope=bot&permissions=2146958847&guild_id=${guild.id}`;
@@ -26,7 +26,7 @@ async function fetchUser(userData, client, query) {
         : "https://bolderadvocacy.org/wp-content/uploads/2018/08/blue-icon-question-mark-image.png";
       guild.displayed = query ? guild.name.toLowerCase().includes(query.toLowerCase()) : true;
     });
-    userData.displayedGuilds = userData.guilds.filter((g) => g.displayed && g.admin);
+    userData.displayedGuilds = userData.guilds.filter((g) => g.displayed && g.admin)
     if (userData.displayedGuilds.length < 1) {
       delete userData.displayedGuilds;
     }

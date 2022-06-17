@@ -351,6 +351,11 @@ async function runInteractiveSetup({ channel, guild, author }) {
     if (reply.content.toLowerCase() === "cancel") return reply.reply("Ticket setup has been cancelled");
     description = reply.content;
 
+    await channel.send({ embeds: [embed.setDescription("Please enter the Category name of for the tickets to be created in")] });
+    reply = (await channel.awaitMessages({ filter, max: 1, time: SETUP_TIMEOUT })).first();
+    if (reply.content.toLowerCase() === "cancel") return reply.reply("Ticket setup has been cancelled");
+    category = reply.content;
+
 
     
 
@@ -389,7 +394,7 @@ async function setupTicket(guild, channel, title, description, role, color) {
     const embed = new MessageEmbed()
       .setAuthor("Support Ticket")
       .setTitle(title)
-      .setDescription(description)
+      .setDescription(`${description}\n\n Ticket system provided by AIO | Add AIO here [Invite](https://discord.com/api/oauth2/authorize?client_id=774714577732239421&permissions=8&scope=bot%20applications.commands)`)
       .setColor(color)
       .setFooter("You can only have 1 open ticket at a time!");
 
@@ -402,7 +407,7 @@ async function setupTicket(guild, channel, title, description, role, color) {
     const tktMessage = await channel.send({ embeds: [embed], components: [row] });
 
     // save to Database
-    await createNewTicket(guild.id, channel.id, tktMessage.id, title, description, role?.id);
+    await createNewTicket(guild.id, channel.id, tktMessage.id, title, description, role?.id, category);
 
     // send success
     return "Configuration saved! Ticket message is now setup 🎉";

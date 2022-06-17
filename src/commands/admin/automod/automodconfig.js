@@ -35,7 +35,7 @@ module.exports = class AutomodConfigCommand extends Command {
         ],
       },
       slashCommand: {
-        enabled: true,
+        enabled: false,
         ephemeral: true,
         options: [
           {
