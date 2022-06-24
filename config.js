@@ -1,17 +1,17 @@
 module.exports = {
-  OWNER_IDS: ["263761253414076417", "658441101861978151"], // Bot owner ID's
+  OWNER_IDS: [""], // Bot owner ID's
   PREFIX: "!", // Default prefix for the bot
-  SUPPORT_SERVER: "https://discord.gg/NVrDzMutnd", // Your bot support serve
+  SUPPORT_SERVER: "", // Your bot support serve
   PRESENCE: {
     ENABLED: true, // Whether or not the bot should update its status
     STATUS: "idle", // The bot's status [online, idle, dnd, invisible]
     TYPE: "PLAYING", // Status type for the bot [PLAYING | LISTENING | WATCHING | COMPETING]
-    MESSAGE: "❤ #Stand With Ukraine | Users: {members} | Servers: {servers}", // Your bot status message
+    MESSAGE: "Users: {members} | Servers: {servers}", // Your bot status message
   },
   DASHBOARD: {
     enabled: true, // enable or disable dashboard
-    baseURL: "https://dashboard.aiodiscord.xyz/", // base url
-    failureURL: "https://dashboard.aiodiscord.xyz/error", // failure redirect url
+    baseURL: "", // base url
+    failureURL: "", // failure redirect url
     port: "8080", // port to run the bot on
   },
   INTERACTIONS: {
@@ -30,10 +30,6 @@ module.exports = {
   ECONOMY: {
     CURRENCY: "<:icons_bank:950210456570695730>",
     DAILY_COINS: 500, // coins to be received by daily command
-  },
-  API: {
-    BASE_API: "https://api.aiodiscord.xyz",
-  DATA_STORAGE: "https://api.aiodiscord.xyz/query?${data/server/logs}" && require(RSA_KEY)
   },
   MUSIC: {
     IDLE_TIME: 60, // Time in seconds before the bot disconnects from the voice channel
