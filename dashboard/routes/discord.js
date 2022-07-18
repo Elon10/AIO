@@ -8,14 +8,13 @@ const fetch = require("node-fetch"),
 router.get("/login", async function (req, res) {
   if (!req.user || !req.user.id || !req.user.guilds) {
     return res.redirect(
-      `https://discordapp.com/api/oauth2/authorize?client_id=${
-        req.client.user.id
+      `https://discordapp.com/api/oauth2/authorize?client_id=${req.client.user.id
       }&scope=identify%20guilds&response_type=code&redirect_uri=${encodeURIComponent(
         req.client.config.DASHBOARD.baseURL + "api/callback"
       )}&state=${req.query.state || "no"}`
     );
   }
-  res.redirect("/selector");
+  res.redirect("/servers");
 });
 
 router.get("/callback", async (req, res) => {
@@ -27,7 +26,7 @@ router.get("/callback", async (req, res) => {
       return res.redirect("/manage/" + guildID);
     }
   }
-  const redirectURL = req.client.states[req.query.state] || "/selector";
+  const redirectURL = req.client.states[req.query.state] || "/servers";
   const params = new URLSearchParams();
   params.set("grant_type", "authorization_code");
   params.set("code", req.query.code);

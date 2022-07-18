@@ -8,6 +8,7 @@ const logger = require("../helpers/logger");
 const MusicManager = require("./MusicManager");
 const Command = require("./Command");
 const BaseContext = require("./BaseContext");
+const GiveawayManager = require("./GiveawayManager");
 
 module.exports = class BotClient extends Client {
   constructor() {
@@ -28,48 +29,44 @@ module.exports = class BotClient extends Client {
       restRequestTimeout: 20000,
     });
 
-    this.config = require("@root/config"); // load the config file
-
+    this.config = require("@root/config");
     /**
      * @type {Command[]}
      */
-    this.commands = []; // store actual command
-    this.commandIndex = new Collection(); // store (alias, arrayIndex) pair
+    this.commands = [];
+    this.commandIndex = new Collection();
 
     /**
      * @type {Collection<string, Command>}
      */
-    this.slashCommands = new Collection(); // store slash commands
+    this.slashCommands = new Collection();
 
     /**
      * @type {Collection<string, BaseContext>}
      */
-    this.contextMenus = new Collection(); // store contextMenus
-    this.counterUpdateQueue = []; // store guildId's that needs counter update
+    this.contextMenus = new Collection();
+    this.counterUpdateQueue = [];
 
     // initialize cache
-    this.cmdCooldownCache = new Collection(); // store message cooldowns for commands
-    this.ctxCooldownCache = new Collection(); // store message cooldowns for contextMenus
-    this.xpCooldownCache = new Collection(); // store message cooldowns for xp
-    this.inviteCache = new Collection(); // store invite data for invite tracking
-    this.antiScamCache = new Collection(); // store message data for anti_scam feature
-    this.flagTranslateCache = new Collection(); // store translated messages
+    this.cmdCooldownCache = new Collection();
+    this.ctxCooldownCache = new Collection();
+    this.xpCooldownCache = new Collection();
+    this.inviteCache = new Collection();
+    this.antiScamCache = new Collection();
+    this.flagTranslateCache = new Collection();
 
-    // initialize webhook for sending guild join/leave details
-    this.joinLeaveWebhook = process.env.JOIN_LEAVE_LOGS
-      ? new WebhookClient({ url: process.env.JOIN_LEAVE_LOGS })
-      : undefined;
 
-    // Music Player
+
+
     this.musicManager = new MusicManager(this);
 
-    // Logger
+    this.giveawaysManager = new GiveawayManager(this);
+
+
     this.logger = logger;
   }
 
-  /**
-   * Initialize mongoose connection and keep it alive
-   */
+
   async initializeMongoose() {
     this.logger.log(`Connecting to MongoDb...`);
 
@@ -108,8 +105,7 @@ module.exports = class BotClient extends Client {
   }
 
   /**
-   * Load all events from the specified directory
-   * @param {string} directory directory containing the event files
+   * @param {string} directory 
    */
   loadEvents(directory) {
     this.logger.log(`Loading events...`);
@@ -125,13 +121,11 @@ module.exports = class BotClient extends Client {
         const eventName = file.split(".")[0];
         const event = require(filePath);
 
-        // music events
         if (dirName === "music") {
           this.musicManager.on(eventName, event.bind(null, this));
           musicEvents.push([file, "✓"]);
         }
 
-        // bot events
         else {
           this.on(eventName, event.bind(null, this));
           clientEvents.push([file, "✓"]);
@@ -171,7 +165,6 @@ module.exports = class BotClient extends Client {
   }
 
   /**
-   * Find command matching the invoke
    * @param {string} invoke
    * @returns {Command|undefined}
    */
@@ -181,11 +174,9 @@ module.exports = class BotClient extends Client {
   }
 
   /**
-   * Register command file in the client
    * @param {Command} cmd
    */
   loadCommand(cmd) {
-    // Command
     if (cmd.command?.enabled) {
       const index = this.commands.length;
       if (this.commandIndex.has(cmd.name)) {
@@ -201,7 +192,6 @@ module.exports = class BotClient extends Client {
       this.logger.debug(`Skipping command ${cmd.name}. Disabled!`);
     }
 
-    // Slash Command
     if (cmd.slashCommand?.enabled) {
       if (this.slashCommands.has(cmd.name)) throw new Error(`Slash Command ${cmd.name} already registered`);
       this.slashCommands.set(cmd.name, cmd);
@@ -211,7 +201,6 @@ module.exports = class BotClient extends Client {
   }
 
   /**
-   * Load all commands from the specified directory
    * @param {string} directory
    */
   loadCommands(directory) {

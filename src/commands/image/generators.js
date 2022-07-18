@@ -22,7 +22,7 @@ const availableGenerators = [
   "poutine",
   "rainbow",
   "rip",
-  "shit",
+  "poopy",
   "stonk",
   "tatoo",
   "thomas",

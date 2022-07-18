@@ -24,6 +24,11 @@ module.exports = {
     image: "https://cdn.discordapp.com/attachments/945112333666099230/945118013487738970/fun.gif",
     emoji: "😂",
   },
+  GIVEAWAY: {
+    name: "Giveaway",
+    image: "https://pubwriter.net/images/gif/gift.gif",
+    emoji: "🎉",
+  },
   IMAGE: {
     name: "Image",
     image: "https://cdn.discordapp.com/attachments/945112333666099230/945118601629819010/image.gif",

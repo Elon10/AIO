@@ -169,4 +169,5 @@ module.exports = {
   getMemberStats,
   findMatchingRoles,
   resolveMember,
+  getMatchingCategory,
 };

@@ -126,7 +126,7 @@ async function logModeration(issuer, target, reason, type, data = {}) {
       .addField("Reason", reason || "No reason provided", true)
       .setTimestamp(Date.now());
 
-    if (type.toUpperCase() === "MUTE") embed.addField("IsPermanent", "✓", true);
+    if (type.toUpperCase() === "MUTE") embed.addField("IsPermanent", "unknown", true);
     if (type.toUpperCase() === "MOVE") embed.addField("Moved to", data.channel.name, true);
   }
 

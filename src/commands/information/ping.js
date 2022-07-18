@@ -41,7 +41,7 @@ module.exports = class PingCommand extends Command {
     }
 
     const embed = new MessageEmbed()
-      .setAuthor({ name: message.client.user.username, iconURL: message.client.user.avatarURL()})
+      .setAuthor('AIO')
       .addField("Strength", `${emoji}`, true)
       .addField("Response Time", `${ping}ms`,true)
       .addField("Comments",`${text}`,false)
@@ -57,15 +57,15 @@ module.exports = class PingCommand extends Command {
     let text
     const ping = Math.floor(interaction.client.ws.ping)
     if (ping > 0){
-      emoji = "<:connectionGreen:943634046200717392>"
+      emoji = "<:icons_goodping:950210495934238730>"
       text = "The connection to the DiscordAPI is Good, There should be no issues with the bot!"
     }
     if (ping > 125){
-      emoji = "<:connectionAmber:943634056078307338>"
+      emoji = "<:icons_idelping:950210481350643773>"
       text = "The connection to the DiscordAPI is moderate, there might be little delays in bot responses!"
     }
     if (ping > 250){
-      emoji = "<:connectionRed:943634032128819200>"
+      emoji = "<:icons_badping:950210564083310603>"
       text = "The connection to the discordAPI is weak, bot commands might take prolonged times to respond!"
     }
 

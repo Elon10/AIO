@@ -4,9 +4,7 @@ const { EMBED_COLORS, IMAGE } = require("@root/config");
 const { getBuffer } = require("@utils/httpUtils");
 const { getSettings } = require("@schemas/Guild");
 const { resolveMember } = require("@utils/guildUtils");
-const { getMember, getTop100 } = require("@schemas/Member");
-const Mee6LevelsApi = require("mee6-levels-api");
-const guildId = "756179032542019644";
+const { getMember, getXpLb } = require("@schemas/Member");
 
 module.exports = class Rank extends Command {
   constructor(client) {
@@ -61,10 +59,10 @@ async function getRank({ guild }, member) {
   const settings = await getSettings(guild);
   if (!settings.ranking.enabled) return "Ranking is disabled on this server";
 
-  const memberDb = await Mee6LevelsApi.getUserXp(guildId, user.id);
+  const memberDb = await getMember(guild.id, user.id);
   if (!memberDb.xp) return `${user.tag} is not ranked yet!`;
 
-  const lb = await Mee6LevelsApi.getLeaderboardPage(guildId);
+  const lb = await getXpLb(guild.id, 100);
   let pos = -1;
   lb.forEach((doc, i) => {
     if (doc.member_id == user.id) {

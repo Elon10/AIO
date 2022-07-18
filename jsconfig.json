@@ -9,7 +9,8 @@
       "@features/*": ["./src/features/*"],
       "@schemas/*": ["./src/schemas/*"],
       "@src/*": ["./src/*"],
-      "@utils/*": ["./src/utils/*"]
+      "@utils/*": ["./src/utils/*"],
+      "@database/*": ["database/*"]
     }
   },
   "exclude": ["node_modules", "**/node_modules/*"]

@@ -140,8 +140,8 @@ async function getHelpMenu({ client, guild }) {
     .setDescription(
       "**About Me:**\n" +
         `Hello I am ${guild.me.displayName}!\n` +
-        "I am a Multifunctional bot made by my creator Ａurora#0001\n" +
-        `My prefix is \`!\` **or** \`/\` to use slash commands!\n\n **Help:** Direct Message Ａurora#0001`
+        "I am a Multifunctional bot made by my creator River#0003\n" +
+        `My prefix is \`!\` **or** \`/\` to use slash commands!\n\n **Help:** Direct Message River#0003`
     )
     .setFooter("AIO • 2022");
 
@@ -266,8 +266,8 @@ function getSlashCategoryEmbeds(client, category) {
       const subCmds = cmd.slashCommand.options.filter((opt) => opt.type === "SUB_COMMAND");
       const subCmdsString = subCmds.map((s) => s.name).join(", ");
 
-      return `\`/${cmd.name}\`\n <:arow1:927668942502232074> **Description**: ${cmd.description}\n ${
-        subCmds == 0 ? "" : `<:arow1:927668942502232074> **SubCommands [${subCmds.length}]**: ${subCmdsString}\n`
+      return `\`/${cmd.name}\`\n <:arrow:948311928009261076> **Description**: ${cmd.description}\n ${
+        subCmds == 0 ? "" : `<:sub:948311942651592735> **SubCommands [${subCmds.length}]**: ${subCmdsString}\n`
       } `;
     });
 

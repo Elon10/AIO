@@ -18,7 +18,7 @@ module.exports = class XPSystem extends Command {
       slashCommand: {
         enabled: true,
         ephemeral: true,
-        options: [
+        options: [ 
           {
             name: "status",
             description: "enabled or disabled",

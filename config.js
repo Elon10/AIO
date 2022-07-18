@@ -1,24 +1,24 @@
 module.exports = {
-  OWNER_IDS: [658441101861978151], // Bot owner ID's
+  OWNER_IDS: ["263761253414076417", "658441101861978151"], // Bot owner ID's
   PREFIX: "!", // Default prefix for the bot
   SUPPORT_SERVER: "https://discord.gg/NVrDzMutnd", // Your bot support serve
   PRESENCE: {
     ENABLED: true, // Whether or not the bot should update its status
-    STATUS: "online", // The bot's status [online, idle, dnd, invisible]
-    TYPE: "WATCHING", // Status type for the bot [PLAYING | LISTENING | WATCHING | COMPETING]
-    MESSAGE: "{members} members in {servers} servers", // Your bot status message
+    STATUS: "idle", // The bot's status [online, idle, dnd, invisible]
+    TYPE: "PLAYING", // Status type for the bot [PLAYING | LISTENING | WATCHING | COMPETING]
+    MESSAGE: "❤ #Stand With Ukraine | Users: {members} | Servers: {servers}", // Your bot status message
   },
   DASHBOARD: {
     enabled: true, // enable or disable dashboard
     baseURL: "http://localhost:8080/", // base url
-    failureURL: "http://localhost:8080/", // failure redirect url
+    failureURL: "http://localhost:8080/error", // failure redirect url
     port: "8080", // port to run the bot on
   },
   INTERACTIONS: {
     SLASH: true, // Should the interactions be enabled
     CONTEXT: true, // Should contexts be enabled
-    GLOBAL: true, // Should the interactions be registered globally
-    TEST_GUILD_ID: "", // Guild ID where the interactions should be registered. [** Test you commands here first **]
+    GLOBAL: false, // Should the interactions be registered globally
+    TEST_GUILD_ID: "595715096316084224", // Guild ID where the interactions should be registered. [** Test you commands here first **]
   },
   XP_SYSTEM: {
     COOLDOWN: 100, // Cooldown in seconds between messages
@@ -28,24 +28,13 @@ module.exports = {
     DAILY_COINS: 100, // coins to be received by daily command
   },
   ECONOMY: {
-    CURRENCY: ":coin:",
+    CURRENCY: "<:icons_bank:950210456570695730>",
     DAILY_COINS: 500, // coins to be received by daily command
-  },
-  IMAGE: {
-    BASE_API: "https://image-api.strangebot.xyz",
   },
   MUSIC: {
     IDLE_TIME: 60, // Time in seconds before the bot disconnects from the voice channel
     MAX_SEARCH_RESULTS: 5,
     NODES: [
-      {
-        host: "disbotlistlavalink.ml",
-        port: 443,
-        password: "LAVA",
-        identifier: "DBL Lavalink",
-        retryDelay: 3000,
-        secure: true,
-      },
       {
         host: "lava.link",
         port: 80,
