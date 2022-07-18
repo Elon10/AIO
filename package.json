@@ -11,6 +11,7 @@
     "tailwind:watch": "npx tailwindcss -i ./dashboard/public/styles/style.css -o ./dashboard/public/styles/tailwind.css --watch"
   },
   "dependencies": {
+    "@tailwindcss/forms": "^0.5.2",
     "@vitalets/google-translate-api": "^7.0.0",
     "ascii-table": "0.0.9",
     "btoa": "^1.2.1",
