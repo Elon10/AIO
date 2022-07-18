@@ -9,7 +9,7 @@ module.exports = {
     MESSAGE: "Users: {members} | Servers: {servers}", // Your bot status message
   },
   DASHBOARD: {
-    enabled: true, // enable or disable dashboard
+    enabled: false, // enable or disable dashboard
     baseURL: "", // base url
     failureURL: "", // failure redirect url
     port: "8080", // port to run the bot on
@@ -18,7 +18,7 @@ module.exports = {
     SLASH: true, // Should the interactions be enabled
     CONTEXT: true, // Should contexts be enabled
     GLOBAL: false, // Should the interactions be registered globally
-    TEST_GUILD_ID: "595715096316084224", // Guild ID where the interactions should be registered. [** Test you commands here first **]
+    TEST_GUILD_ID: "997931140230942720", // Guild ID where the interactions should be registered. [** Test you commands here first **]
   },
   XP_SYSTEM: {
     COOLDOWN: 100, // Cooldown in seconds between messages

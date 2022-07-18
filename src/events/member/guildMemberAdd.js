@@ -25,4 +25,6 @@ module.exports = async (client, member) => {
 
   // Send welcome message
   greetingHandler.sendWelcome(member, inviterData);
+
+  // Check if join Role is enabled
 };
