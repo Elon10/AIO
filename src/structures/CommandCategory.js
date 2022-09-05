@@ -9,6 +9,11 @@ module.exports = {
     image: "https://media.discordapp.net/attachments/998404091157946480/1004131796218290277/moderation_ui.png?width=1161&height=677",
     emoji: "🤖",
   },
+  GAMES: {
+    name: "Games",
+    image: "https://media.discordapp.net/attachments/936308735016574987/996538871284248637/unknown.png?width=901&height=675",
+    emoji: "🎲",
+  },
   ANIME: {
     name: "Anime",
     image: "https://cdn.discordapp.com/attachments/945112333666099230/945116875237523497/anime.gif",
@@ -80,7 +85,11 @@ module.exports = {
     emoji: "🛠",
     GIVEAWAY: {
       name: "Giveaway",
+<<<<<<< HEAD
       image: "https://media.discordapp.net/attachments/998404091157946480/1004131795316506735/giveaways_ui.png?width=1161&height=677",
+=======
+      image: "https://i.pinimg.com/originals/7d/b3/24/7db324ed27acf79d21e3a3132287623c.gif",
+>>>>>>> d067698e3ef4d73c47c98b98159ba765f43555d4
       emoji: "🎁",
     }
   },

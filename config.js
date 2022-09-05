@@ -1,24 +1,37 @@
 module.exports = {
-  OWNER_IDS: ["263761253414076417", "658441101861978151"], // Bot owner ID's
+  OWNER_IDS: [""], // Bot owner ID's
   PREFIX: "!", // Default prefix for the bot
+<<<<<<< HEAD
   SUPPORT_SERVER: "https://discord.gg/us46reuQR3", // Your bot support serve
+=======
+  SUPPORT_SERVER: "", // Your bot support serve
+>>>>>>> d067698e3ef4d73c47c98b98159ba765f43555d4
   PRESENCE: {
     ENABLED: true, // Whether or not the bot should update its status
-    STATUS: "online", // The bot's status [online, idle, dnd, invisible]
+    STATUS: "idle", // The bot's status [online, idle, dnd, invisible]
     TYPE: "PLAYING", // Status type for the bot [PLAYING | LISTENING | WATCHING | COMPETING]
+<<<<<<< HEAD
     MESSAGE: "❤ Users: {members} | Servers: {servers}", // Your bot status message
   },
   DASHBOARD: {
     enabled: true, // enable or disable dashboard
     baseURL: "https://dashboard.aiodiscord.xyz/", // base url
     failureURL: "https://dashboard.aiodiscord.xyz/servers", // failure redirect url
+=======
+    MESSAGE: "Users: {members} | Servers: {servers}", // Your bot status message
+  },
+  DASHBOARD: {
+    enabled: false, // enable or disable dashboard
+    baseURL: "", // base url
+    failureURL: "", // failure redirect url
+>>>>>>> d067698e3ef4d73c47c98b98159ba765f43555d4
     port: "8080", // port to run the bot on
   },
   INTERACTIONS: {
     SLASH: true, // Should the interactions be enabled
     CONTEXT: true, // Should contexts be enabled
-    GLOBAL: true, // Should the interactions be registered globally
-    TEST_GUILD_ID: "", // Guild ID where the interactions should be registered. [** Test you commands here first **]
+    GLOBAL: false, // Should the interactions be registered globally
+    TEST_GUILD_ID: "997931140230942720", // Guild ID where the interactions should be registered. [** Test you commands here first **]
   },
   XP_SYSTEM: {
     COOLDOWN: 30, // Cooldown in seconds between messages
@@ -31,6 +44,7 @@ module.exports = {
     CURRENCY: "<:icons_bank:950210456570695730>",
     DAILY_COINS: 500, // coins to be received by daily command
   },
+<<<<<<< HEAD
   SUGGESTIONS: {
     ENABLED: true, // Should the suggestion system be enabled
     EMOJI: {
@@ -44,6 +58,8 @@ module.exports = {
   IMAGE: {
     BASE_API: "https://image-api.strangebot.xyz",
   },
+=======
+>>>>>>> d067698e3ef4d73c47c98b98159ba765f43555d4
   MUSIC: {
     IDLE_TIME: 60, // Time in seconds before the bot disconnects from the voice channel
     MAX_SEARCH_RESULTS: 5,
@@ -86,6 +102,6 @@ module.exports = {
     MEMBERS: 10000,
   },
   MESSAGES: {
-    API_ERROR: "Unexpected Backend Error! Try again later or contact support server",
+    API_ERROR: "Unexpected Backend Error! Try again later or contact support server - Error code - x015234 ",
   },
 };

@@ -23,9 +23,61 @@ const Schema = mongoose.Schema({
             default: 0,
         },
     },
+<<<<<<< HEAD
     prefix: {
         type: String,
         default: PREFIX,
+=======
+  },
+  muteRole: {
+    enabled: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  antinuke: {
+    enabled: {
+      type: Boolean,
+      default: false,
+    },
+    roledelete: {
+      type: Number,
+      default: 5,
+    },
+    botadd: {
+      type: Number,
+      default: 5,
+    },
+    everyoneping: {
+      type: Number,
+      default: 5,
+    },
+    antiban: {
+      type: Number,
+      default: 5,
+    },
+    actionwhitelist: {
+      type: Array,
+      default: [],
+    },
+    actiontaken: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  prefix: {
+    type: String,
+    default: PREFIX,
+  },
+  ranking: {
+    enabled: Boolean,
+  },
+  ticket: {
+    log_channel: String,
+    limit: {
+      type: Number,
+      default: 10,
+>>>>>>> d067698e3ef4d73c47c98b98159ba765f43555d4
     },
     ranking: {
         enabled: Boolean,

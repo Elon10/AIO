@@ -6,17 +6,27 @@
     <div class="grid grid-cols-1 md:grid-cols-8 flex-1">
       <%- include('../includes/sidebar') %>
 
+<<<<<<< HEAD
         <div class="flex flex-col col-span-6 container">
           <%- include('../includes/manageheader') %>
             <h2 class="text-3xl font-semibold mx-8 mt-6 mb-2">Ticket panels</h2>
+=======
+      <div class="flex flex-col col-span-6 container">
+          <%- include('../includes/manageheader') %>
+            <h2 class="text-3xl font-semibold underline mx-8 mt-6 mb-2">Ticket panels</h2>
+>>>>>>> d067698e3ef4d73c47c98b98159ba765f43555d4
 
             <section class="grid grid-cols gap-4 my-4 mx-8">
               <div class="flex flex-col rounded-lg bg-darkerbggray h-[fit-content]">
                 <div class="p-4">
                   <h3 class="font-semibold text-xl">Add ticket panel</h3>
                 </div>
+<<<<<<< HEAD
                 <form role="form" action="/manage/<%= guild.id %>/ticketpanels/" method="POST"
                   class="flex flex-col px-4 pt-2 pb-4">
+=======
+                <form role="form" action="/manage/<%= guild.id %>/ticketpanels/" method="POST" class="flex flex-col px-4 pt-2 pb-4">
+>>>>>>> d067698e3ef4d73c47c98b98159ba765f43555d4
                   <div class="flex flex-row items-center space-x-4">
                     <div class="flex flex-col flex-1">
                       <label>Name:</label>
@@ -52,7 +62,11 @@
                 </form>
               </div>
 
+<<<<<<< HEAD
               <div class="flex flex-col rounded-lg bg-darkerbggray h-[fit-content]">
+=======
+          <div class="flex flex-col rounded-lg bg-darkerbggray h-[fit-content]">
+>>>>>>> d067698e3ef4d73c47c98b98159ba765f43555d4
                 <div class="p-4">
                   <h3 class="font-semibold text-xl">Configure ticket panels</h3>
                 </div>
@@ -104,7 +118,11 @@
                         </form>
                       </div>
                       <form role="form" action="/manage/<%= guild.id %>/ticketpanels/delete" method="POST"
+<<<<<<< HEAD
                         class="flex flex-row items-center flex-[2/2]">
+=======
+                        class="flex flex-row items-center flex-[1/2]">
+>>>>>>> d067698e3ef4d73c47c98b98159ba765f43555d4
                         <input type="hidden" name="id" value="<%= ticketPanel._id %>">
                         <button type="submit" name="ticketPanelsAdd"
                           class="px-3 py-1 rounded-md flex-[1/2] mt-4 bg-red-700 transition-opacity duration-300 hover:opacity-70">
@@ -119,6 +137,7 @@
             <%- include('../includes/footer') %>
         </div>
     </div>
+<<<<<<< HEAD
     <script defer>
       VirtualSelect.init({
         ele: 'select[name="role"]',
@@ -127,6 +146,16 @@
         optionHeight: 32,
       });
     </script>
+=======
+      <script defer>
+        VirtualSelect.init({
+          ele: 'select[name="role"]',
+          setValueAsArray: true,
+          additionalClasses: "h-[32px] rounded-md bg-gray-50 text-gray-900",
+          optionHeight: 32,
+        });
+      </script>
+>>>>>>> d067698e3ef4d73c47c98b98159ba765f43555d4
   </body>
 
 </html>

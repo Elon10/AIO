@@ -8,7 +8,7 @@ const { createNewTicket } = require("@root/src/schemas/Message");
 
 // Utils
 const { parsePermissions } = require("@utils/botUtils");
-const { canSendEmbeds, findMatchingRoles, getMatchingChannel } = require("@utils/guildUtils");
+const { canSendEmbeds, findMatchingRoles, getMatchingChannel, GetMatchingCategory } = require("@utils/guildUtils");
 const { isTicketChannel, closeTicket, closeAllTickets } = require("@utils/ticketUtils");
 const { isHex } = require("@utils/miscUtils");
 

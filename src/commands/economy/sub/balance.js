@@ -11,7 +11,7 @@ module.exports = async (user) => {
     .setThumbnail(user.displayAvatarURL())
     .addField("Wallet", `${economy?.coins || 0}${ECONOMY.CURRENCY}`, true)
     .addField("Bank", `${economy?.bank || 0}${ECONOMY.CURRENCY}`, true)
-    .addField("Net Worth", `${(economy?.coins || 0) + (economy?.bank || 0)}${ECONOMY.CURRENCY}`, true);
+    .addField("Net Worth - Bank + Balance", `${(economy?.coins || 0) + (economy?.bank || 0)}${ECONOMY.CURRENCY}`, true);
 
   return { embeds: [embed] };
 };

@@ -118,14 +118,28 @@ async function getHelpMenu({ client, guild }) {
   // Buttons Row
   let components = [];
   components.push(
+<<<<<<< HEAD
     new MessageButton().setCustomId("previousBtn").setEmoji("<a:Emojii_LeftArrow:987502525601153104>").setStyle("SECONDARY").setDisabled(true),
     new MessageButton().setCustomId("nextBtn").setEmoji("<a:Emojii_RightArrow:987502521587236934>").setStyle("SECONDARY").setDisabled(true)
+=======
+    new MessageButton()
+      .setCustomId("previousBtn")
+      .setEmoji("<:arrow2:942835729237700718>")
+      .setStyle("SECONDARY")
+      .setDisabled(true),
+    new MessageButton()
+      .setCustomId("nextBtn")
+      .setEmoji("<:arrow1:942835717216817253>")
+      .setStyle("SECONDARY")
+      .setDisabled(true)
+>>>>>>> d067698e3ef4d73c47c98b98159ba765f43555d4
   );
 
   let buttonsRow = new MessageActionRow().addComponents(components);
 
   const embed = new MessageEmbed()
     .setColor(EMBED_COLORS.BOT_EMBED)
+<<<<<<< HEAD
     .setThumbnail('https://media.discordapp.net/attachments/992411771765801050/997224302757814292/IMG_0512.gif')
     .setDescription(
       "**About Me:**\n" +
@@ -135,6 +149,18 @@ async function getHelpMenu({ client, guild }) {
     .setFooter('AIO • 2022')
 
 
+=======
+    .setThumbnail(
+      "https://media2.giphy.com/media/WO6TiLAAfjVVnIf3JK/200.gif?cid=95b279447e3f017d721713e95ced94a14fb94432f16fb54b&rid=200.gif&ct=s"
+    )
+    .setDescription(
+      "**About Me:**\n" +
+        `Hello I am ${guild.me.displayName}!\n` +
+        "I am a Multifunctional bot made by my creator River#0003\n" +
+        `My prefix is \`!\` **or** \`/\` to use slash commands!\n\n **Help:** Direct Message River#0003`
+    )
+    .setFooter("AIO • 2022");
+>>>>>>> d067698e3ef4d73c47c98b98159ba765f43555d4
 
   return {
     embeds: [embed],

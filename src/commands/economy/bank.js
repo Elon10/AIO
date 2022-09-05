@@ -117,30 +117,34 @@ module.exports = class BankCommand extends Command {
     //
     else if (sub === "deposit") {
       const coins = args.length && parseInt(args[1]);
-      if (isNaN(coins)) return message.reply("Provide a valid number of coins you wish to deposit");
+      if (isNaN(coins))
+        return message.reply("Provide a valid number of coins you wish to deposit - `!bank deposit <coins>`");
       response = await deposit(message.author, coins);
     }
 
     //
     else if (sub === "withdraw") {
       const coins = args.length && parseInt(args[1]);
-      if (isNaN(coins)) return message.reply("Provide a valid number of coins you wish to withdraw");
+      if (isNaN(coins))
+        return message.reply("Provide a valid number of coins you wish to withdraw" - `!bank withdraw <coins>`);
       response = await withdraw(message.author, coins);
     }
 
     //
     else if (sub === "transfer") {
-      if (args.length < 3) return message.reply("Provide a valid user and coins to transfer");
+      if (args.length < 3)
+        return message.reply("Provide a valid user and coins to transfer" - `!bank transfer <user> <coins>`);
       const target = await resolveMember(message, args[1], true);
-      if (!target) return message.reply("Provide a valid user to transfer coins to");
+      if (!target) return message.reply("Provide a valid user to transfer coins to - `!bank transfer <user> <coins>`");
       const coins = parseInt(args[2]);
-      if (isNaN(coins)) return message.reply("Provide a valid number of coins you wish to transfer");
+      if (isNaN(coins))
+        return message.reply("Provide a valid number of coins you wish to transfer - `!bank transfer <user> <coins>`");
       response = await transfer(message.author, target.user, coins);
     }
 
     //
     else {
-      return message.reply("Invalid command usage");
+      return message.reply("Invalid command usage - `!help economy <subcommand>`");
     }
 
     await message.reply(response);

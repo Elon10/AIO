@@ -91,7 +91,9 @@ module.exports = class MaxWarn extends Command {
     if (input === "action") {
       const action = args[1]?.toUpperCase();
       if (!action || !["MUTE", "KICK", "BAN"].includes(action))
-        return message.reply("Not a valid action. Action can be `Mute`/`Kick`/`Ban`");
+        return message.reply(
+          "Not a valid action. Action can be `Mute`/`Kick`/`Ban` - `Mute` to mute, `Kick` to kick, `Ban` to ban"
+        );
       response = await setAction(message.guild, action);
     }
 

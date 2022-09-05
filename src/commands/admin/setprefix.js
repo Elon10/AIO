@@ -16,7 +16,6 @@ module.exports = class SetPrefix extends Command {
       },
       slashCommand: {
         enabled: true,
-        ephemeral: true,
         options: [
           {
             name: "newprefix",
@@ -54,5 +53,5 @@ async function setNewPrefix(guild, newPrefix) {
   settings.prefix = newPrefix;
   await settings.save();
 
-  return `New prefix is set to \`${newPrefix}\``;
+  return `New prefix is set to \`${newPrefix}\` - \`${guild.name}\` will now use this prefix for commands.`;
 }

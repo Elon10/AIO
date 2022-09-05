@@ -18,7 +18,7 @@ module.exports = class XPSystem extends Command {
       slashCommand: {
         enabled: true,
         ephemeral: true,
-        options: [
+        options: [ 
           {
             name: "status",
             description: "enabled or disabled",
@@ -46,7 +46,10 @@ module.exports = class XPSystem extends Command {
    */
   async messageRun(message, args) {
     const input = args[0].toLowerCase();
-    if (!["on", "off"].includes(input)) return message.reply("Invalid status. Value must be `on/off`");
+    if (!["on", "off"].includes(input))
+      return message.reply(
+        "Invalid status. Value must be `on/off - `on` to enable XP tracking, `off` to disable XP tracking."
+      );
     const response = await setStatus(message.guild, input);
     return message.reply(response);
   }

@@ -2,7 +2,6 @@ require("dotenv").config();
 require("module-alias/register");
 chalk = require("chalk")
 
-
 const path = require("path");
 const { startupCheck } = require("@utils/botUtils");
 const { BotClient } = require("@src/structures");
@@ -22,13 +21,13 @@ poster.on('posted', (stats) => {
 })
 
 // catch client errors and warnings
-client.on("error", (err) => client.logger.error(chalk.red(`Client Error`, err)));
-client.on("warn", (message) => client.logger.warn(chalk.yellow(`Client Warning: ${message}`)));
+client.on("error", (err) => client.logger.error(`Client Error`, err));
+client.on("warn", (message) => client.logger.warn(`Client Warning: ${message}`));
 
 // find unhandled promise rejections
 process.on("unhandledRejection", (err) => {
   console.error(err);
-  client.logger.error(chalk.red(`Unhandled exception`, err));
+  client.logger.error(`Unhandled exception`, err);
 });
 
 (async () => {
