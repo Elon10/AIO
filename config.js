@@ -4,7 +4,7 @@ module.exports = {
   SUPPORT_SERVER: "https://discord.gg/NVrDzMutnd", // Your bot support serve
   PRESENCE: {
     ENABLED: true, // Whether or not the bot should update its status
-    STATUS: "idle", // The bot's status [online, idle, dnd, invisible]
+    STATUS: "online", // The bot's status [online, idle, dnd, invisible]
     TYPE: "PLAYING", // Status type for the bot [PLAYING | LISTENING | WATCHING | COMPETING]
     MESSAGE: "🏳‍🌈 Happy pride month ❤ | Users: {members} | Servers: {servers}", // Your bot status message
   },
@@ -48,13 +48,6 @@ module.exports = {
     IDLE_TIME: 60, // Time in seconds before the bot disconnects from the voice channel
     MAX_SEARCH_RESULTS: 5,
     NODES: [
-      {
-        host: "lavalink.darrenofficial.com",
-        port: 80,
-        password: "f82263yh75f6r5",
-        retryDelay: 5000,
-        secure: false,
-      },
       {
         host: "lavalink.kapes.eu",
         port: 2222,

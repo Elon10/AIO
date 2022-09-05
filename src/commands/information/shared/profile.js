@@ -14,7 +14,7 @@ module.exports = async ({ guild }, user) => {
     .setColor(EMBED_COLORS.BOT_EMBED)
     .addField("User Tag", user.tag, true)
     .addField("ID", user.id, true)
-    .addField("Discord Registered", user.createdAt.toDateString(), false)
+    .addField("Discord Registered", `<t:${Math.round(user.createdTimestamp / 1000)}:F> (<t:${Math.round(user.createdTimestamp / 1000)}:R>)`, false)
     .addField("Cash", `${userData.coins}${ECONOMY.CURRENCY}`, true)
     .addField("Bank", `${userData.bank} ${ECONOMY.CURRENCY}`, true)
     .addField("Net Worth", `${userData.coins + userData.bank}${ECONOMY.CURRENCY}`, true)
@@ -24,7 +24,7 @@ module.exports = async ({ guild }, user) => {
     .addField("Level*", `${settings.ranking.enabled ? memberData.level + " " : "Not Tracked"}`, true)
     .addField("Strikes*", memberData.strikes + " ", true)
     .addField("Warnings*", memberData.warnings + " ", true)
-    .addField("Avatar-URL", user.displayAvatarURL({ format: "png" }))
+    .addField("Avatar-URL", user.displayAvatarURL({ format: "png", dynamic: true }))
     .setFooter("Fields marked (*) are guild specific");
 
   return { embeds: [embed] };

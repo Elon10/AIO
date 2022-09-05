@@ -1,26 +1,40 @@
-<aside>
-  <section class="flex flex-col p-4">
-    <div class="flex flex-row items-center border-b border-b-gray-50 pb-4">
-        <img src="<%= user.displayAvatar %>" width="64" height="64" class="rounded-full" alt="User Image">
-      <div class="info ml-2">
-        <p>
-          <%= user.username %>#<%= user.discriminator %>
-        </p>
-        <a href="#">
-          <%= user.displayedGuilds.length %> servers
-        </a>
-      </div>
-    </div>
+<aside class="col-span-2 border-r border-white/10">
+  <section class="flex flex-col p-4 bg-darkerbggray h-full">
+    <h1 class="text-center mb-2 text-5xl font-bold">AIO</h1>
 
-    <ul class="flex flex-col mt-4">
-      <li><a href="/servers"><i class="fa fa-home"></i> <span>Home</span></a></li>
-      
-        <li class="font-semibold text-lg mt-4">CONFIGURATION</li>
-        <li class="mt-2">
-        <li class="ml-2"><a href="/manage/<%= guild.id %>/basic"><i class="fas fa-cogs mr-1"></i> <span>Management</span></a></li>
-        <li class="ml-2"><a href="/manage/<%= guild.id %>/greeting"><i class="fa fa-bullhorn mr-1"></i> <span>Greeting</span></a></li>
-        <li class="ml-2"><a href="/manage/<%= guild.id %>/commands"><i class="fa fa-robot mr-1"></i> <span>Commands</span></a></li>
-        <li class="ml-2"><a href="/manage/<%= guild.id %>/ticketpanels"><i class="fas fa-ticket-alt mr-1"></i> <span>Ticket panels</span></a></li>
+    <a href="/servers" class="bg-black/10 rounded-xl flex flex-row items-center p-4 my-4 shadow">
+      <img
+        src="<%= guild.iconURL %>"
+        class="rounded-full border-2 border-white"
+        width="32"
+        height="32"
+      />
+      <h3 class="text-lg font-bold ml-2">
+        <%= guild.name %>
+      </h3>
+    </a>
+
+    <ul class="flex flex-col mt-4">      
+        <li class="p-1 flex w-full">
+          <a href="/manage/<%= guild.id %>/basic" class="<% if(currentURL.endsWith('basic')) { %> bg-white/5 font-semibold <% } else { %> bg-white/10 <% } %> w-full px-4 py-3 rounded font-sans">
+            <i class="fas fa-cogs mr-1 w-6"></i> <span>Management</span>
+          </a>
+        </li>
+        <li class="p-1 flex w-full">
+          <a href="/manage/<%= guild.id %>/greeting" class="<% if(currentURL.endsWith('greeting')) { %> bg-white/5 font-semibold <% } else { %> bg-white/10 <% } %> w-full px-4 py-3 rounded font-sans">
+            <i class="fa fa-bullhorn mr-1 w-6"></i> <span>Greeting</span>
+          </a>
+        </li>
+        <li class="p-1 flex w-full">
+          <a href="/manage/<%= guild.id %>/commands" class="<% if(currentURL.endsWith('commands')) { %> bg-white/5 font-semibold <% } else { %> bg-white/10 <% } %> w-full px-4 py-3 rounded font-sans">
+            <i class="fa fa-robot mr-1 w-6"></i> <span>Commands</span>
+          </a>
+        </li>
+        <li class="p-1 flex w-full">
+          <a href="/manage/<%= guild.id %>/ticketpanels" class="<% if(currentURL.endsWith('ticketpanels')) { %> bg-white/5 font-semibold <% } else { %> bg-white/10 <% } %> w-full px-4 py-3 rounded font-sans">
+            <i class="fas fa-ticket-alt mr-1 w-6"></i> <span>Ticket panels</span>
+          </a>
+        </li>
         </li>
       </ul>
     </ul>

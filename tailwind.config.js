@@ -1,22 +1,16 @@
-const colors = require('tailwindcss/colors')
-
 module.exports = {
   content: ["./dashboard/views/**/*.{html,js,ejs}"],
   theme: {
     fontFamily: {
       sans: ['"Source Sans Pro"', "sans-serif"],
-      colors: {
-      transparent: 'transparent',
-      current: 'currentColor',
-      black: colors.black,
-      white: colors.white,
-      gray: colors.gray,
-      emerald: colors.emerald,
-      indigo: colors.indigo,
-      yellow: colors.yellow,
-      }
     },
-    extend: {},
+    extend: {
+      colors: {
+        primary: "#3980FF",
+        bggray: "#272934",
+        darkerbggray: "#1F2129",
+      },
+    },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/forms")],
 };

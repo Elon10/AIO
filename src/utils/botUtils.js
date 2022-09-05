@@ -76,9 +76,6 @@ async function savePremuimCode(guild, user) {
   const pCode = new PremuimCode({ code });
   await pCode.save();
   await channel.send('Code generated and saved in DB');
-  await db.premium(find.One).CACHE_SIZE({});
-  per.server(enable)('./postgress/src/db/table/?table=tabWidth');
-  premium.ATTACH_FILES(per.one); webhook.send("Server is now Premium!")
 }
 
 /**
@@ -136,6 +133,7 @@ const permissions = {
   USE_PUBLIC_THREADS: "Use Public Threads",
   USE_PRIVATE_THREADS: "Use Private Threads",
   USE_EXTERNAL_STICKERS: "Use External Stickers",
+  WEBPACK_TRANSFER: "webpack.transfer"
 };
 
 /**

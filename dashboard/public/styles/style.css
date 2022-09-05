@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 /* The switch - the box around the slider */
 .switch {
   position: relative;
@@ -55,7 +54,6 @@ input:checked + .slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
-  transform: translate(46px)
 }
 
 /* Rounded sliders */
@@ -70,4 +68,12 @@ input:checked + .slider:before {
 .vscomp-toggle-button {
   height: 32px !important;
   @apply rounded-md !important;
+}
+
+.custom-checkbox {
+  @apply appearance-none relative bg-neutral-400 h-4 w-4 cursor-pointer transition-all rounded inline-flex text-center justify-center items-center checked:bg-primary checked:after:border-b-[4px] checked:after:border-white checked:after:border-r-[4px] checked:after:rotate-45 checked:after:rounded-sm after:h-5 after:w-3 after:scale-50 after:absolute after:text-xl after:text-white;
+}
+
+.vscomp-ele {
+  @apply bg-transparent border-0 p-0;
 }

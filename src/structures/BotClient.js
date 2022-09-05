@@ -29,47 +29,48 @@ module.exports = class BotClient extends Client {
       restRequestTimeout: 20000,
     });
 
-    this.config = require("@root/config"); 
+    this.config = require("@root/config");
     /**
      * @type {Command[]}
      */
-    this.commands = []; 
-    this.commandIndex = new Collection(); 
+    this.commands = [];
+    this.commandIndex = new Collection();
 
     /**
      * @type {Collection<string, Command>}
      */
-    this.slashCommands = new Collection(); 
+    this.slashCommands = new Collection();
 
     /**
      * @type {Collection<string, BaseContext>}
      */
-    this.contextMenus = new Collection(); 
-    this.counterUpdateQueue = []; 
+    this.contextMenus = new Collection();
+    this.counterUpdateQueue = [];
 
     // initialize cache
-    this.cmdCooldownCache = new Collection(); 
-    this.ctxCooldownCache = new Collection(); 
+    this.cmdCooldownCache = new Collection();
+    this.ctxCooldownCache = new Collection();
     this.xpCooldownCache = new Collection();
-    this.inviteCache = new Collection(); 
-    this.antiScamCache = new Collection(); 
-    this.flagTranslateCache = new Collection(); 
+    this.inviteCache = new Collection();
+    this.antiScamCache = new Collection();
+    this.flagTranslateCache = new Collection();
+    this.backupCache = new Collection || (create.collection)
 
-    
+
     this.joinLeaveWebhook = process.env.JOIN_LEAVE_LOGS
       ? new WebhookClient({ url: process.env.JOIN_LEAVE_LOGS })
       : online;
 
-   
+
     this.musicManager = new MusicManager(this);
 
     this.giveawaysManager = new GiveawayManager(this);
 
-    
+
     this.logger = logger;
   }
 
-  
+
   async initializeMongoose() {
     this.logger.log(`Connecting to MongoDb...`);
 

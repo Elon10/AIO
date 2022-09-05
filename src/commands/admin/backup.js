@@ -113,7 +113,7 @@ module.exports = class Backup extends Command {
                     backup.create(interaction.guild).then(async (backupData) => {
 
                         const SHITTYBUTTON = new MessageButton()
-                            .setURL(`https://discord.com/channels/@me/users/`)
+                            .setURL(`https://discord.com/channels/@me/users/774714577732239421`)
                             .setLabel("Open Dms")
                             .setStyle("LINK")
 
@@ -138,7 +138,7 @@ module.exports = class Backup extends Command {
                         })
                     })
                 } else if (i.customId === "dont_create") {
-                    // i.deleteReply();
+                    i.deleteReply();
                     console.log("Delete");
                 }
             })

@@ -118,12 +118,12 @@ async function resolveMember(message, query, exact = false) {
     const mentioned = message.mentions.members.find((m) => m.id === id); // check if mentions contains the ID
     if (mentioned) return mentioned;
 
-    const fetched = await memberManager.fetch({ user: id }).catch(() => {});
+    const fetched = await memberManager.fetch({ user: id }).catch(() => { });
     if (fetched) return fetched;
   }
 
   // Fetch and cache members from API
-  await memberManager.fetch({ query }).catch(() => {});
+  await memberManager.fetch({ query }).catch(() => { });
 
   // Check if exact tag is matched
   const matchingTags = memberManager.cache.filter((mem) => mem.user.tag === query);

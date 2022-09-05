@@ -2,34 +2,25 @@
 <html>
   <%- include('../includes/head') %>
 
-  <body class="bg-gray-600 text-gray-50 min-h-screen flex flex-col">
-    <%- include('../includes/header') %>
-
-    <div class="grid grid-cols-1 md:grid-cols-6 flex-1">
+  <body class="bg-bggray text-gray-50 min-h-screen flex flex-col">
+    <div class="grid grid-cols-1 md:grid-cols-8 flex-1">
       <%- include('../includes/sidebar') %>
 
-      <div class="flex flex-col col-span-5 lg:pr-16 px-4 lg:px-0">
-        <section
-          class="flex flex-col md:flex-row items-center w-full justify-between pr-4 py-4 border-b border-b-gray-50"
-        >
-          <h3 class="text-lg font-medium">Commands</h3>
-          <ol class="flex flex-row items-center space-x-4">
-            <li>
-              <a href="/"><i class="fa fa-home mr-2"></i>Selector</a>
-            </li>
-            <i class="fa fa-angle-right"></i>
-            <li><a href="<%=`/manage/${guild.id}/`%>"> <%=guild.name%> </a></li>
-            <i class="fa fa-angle-right"></i>
-            <li class="underline">Commands</li>
-          </ol>
-        </section>
+      <div class="flex flex-col col-span-6 container">
+        <%- include('../includes/manageheader') %>
+        <h2 class="text-3xl font-semibold mx-8 mt-6 mb-2">Commands</h2>
 
-        <section class="grid grid-cols-1 gap-4 my-4">
-          <div class="flex flex-col rounded-lg border border-gray-50 h-[fit-content]">
-            <div class="border-b border-b-gray-50 p-4">
-              <h3 class="font-semibold">Commands Configuration</h3>
+        <section class="grid grid-cols gap-4 my-4 mx-8">
+          <div class="flex flex-col rounded-lg bg-darkerbggray h-[fit-content]">
+            <div class="p-4">
+              <h3 class="font-semibold text-xl">Commands Configuration</h3>
             </div>
-            <form role="form" action="/manage/<%= guild.id %>/commands/" method="POST" class="p-4">
+            <form
+              role="form"
+              action="/manage/<%= guild.id %>/commands/"
+              method="POST"
+              class="flex flex-col px-4 pt-2 pb-4"
+            >
               <div class="grid grid-cols-4 gap-4">
                 <% commands.map(command => { %>
                 <div class="flex flex-row items-center">
@@ -49,7 +40,7 @@
                 <button
                   type="submit"
                   name="commandsUpdate"
-                  class="px-3 py-1 rounded-md bg-cyan-700 transition-opacity duration-300 hover:opacity-70"
+                  class="px-3 py-1 rounded-md bg-primary transition-opacity duration-300 hover:opacity-70"
                 >
                   Update
                 </button>
@@ -57,8 +48,8 @@
             </form>
           </div>
         </section>
+        <%- include('../includes/footer') %>
       </div>
     </div>
-    <%- include('../includes/footer') %>
   </body>
 </html>
