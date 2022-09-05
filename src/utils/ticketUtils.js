@@ -44,7 +44,7 @@ async function parseTicketDetails(channel) {
   const split = channel.topic?.split("|");
   const userId = split[1];
   const title = split[2];
-  const user = await channel.client.users.fetch(userId, { cache: false }).catch(() => {});
+  const user = await channel.client.users.fetch(userId, { cache: false }).catch(() => { });
   return { title, user };
 }
 

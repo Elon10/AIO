@@ -1,6 +1,7 @@
-const { MessageEmbed, Message, CommandInteraction } = require("discord.js");
+const { MessageEmbed, Message, CommandInteraction, Intents, Discord } = require("discord.js");
 const { Command } = require("@src/structures");
 const { EMBED_COLORS } = require("@root/config");
+const client = require("../../structures/BotClient.js")
 
 module.exports = class Eval extends Command {
   constructor(client) {
@@ -84,3 +85,4 @@ const buildErrorResponse = (err) => {
 
   return { embeds: [embed] };
 };
+

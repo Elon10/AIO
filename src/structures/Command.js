@@ -159,8 +159,8 @@ class Command {
     try {
       await this.messageRun(message, args, invoke, prefix);
     } catch (ex) {
-      await message.channel.send("Oops! An error occurred while running the command");
-      this.client.logger.error("messageRun", ex);
+      await message.channel.send("Oops! We encounterd an error wise running that command! Here's an error instead:", ex);
+      this.client.logger.error(chalk.red`messageRun`, ex);
     } finally {
       this.applyCooldown(message.author.id);
     }
@@ -224,7 +224,7 @@ class Command {
       await interaction.deferReply({ ephemeral: this.slashCommand.ephemeral });
       await this.interactionRun(interaction);
     } catch (ex) {
-      await interaction.followUp("Oops! An error occurred while running the command");
+      await interaction.followUp("Oops! We encounterd an error wise running that command! Here's an error instead:", ex);
       this.client.logger.error("interactionRun", ex);
     } finally {
       this.applyCooldown(interaction.user.id);

@@ -1,6 +1,7 @@
 const { MessageEmbed } = require("discord.js");
 const { getSettings } = require("@schemas/Guild");
 const { sendMessage } = require("@utils/botUtils");
+const { getBuffer } = require("@utils/httpUtils");
 
 /**
  * @param {string} content
@@ -89,6 +90,7 @@ async function sendWelcome(member, inviterData = {}) {
 
   sendMessage(channel, response);
 }
+
 
 /**
  * Send farewell message

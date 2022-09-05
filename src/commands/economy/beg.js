@@ -26,7 +26,7 @@ module.exports = class BegCommand extends Command {
    */
   async messageRun(message) {
     const response = await beg(message.author);
-    await message.reply(response);
+    await message.safeReply(response);
   }
 
   /**
@@ -78,7 +78,7 @@ async function beg(user) {
     .setAuthor({ name: `${user.username}`, iconURL: user.displayAvatarURL() })
     .setDescription(
       `**${users[Math.floor(Math.random() * users.length)]}** donated you **${amount}** ${ECONOMY.CURRENCY}\n` +
-        `**Updated Balance:** **${userDb.coins}** ${ECONOMY.CURRENCY}`
+      `**Updated Balance:** **${userDb.coins}** ${ECONOMY.CURRENCY}`
     );
 
   return { embeds: [embed] };

@@ -103,9 +103,6 @@ module.exports = class Backup extends Command {
                 if (i.customId === "yes_create") {
                     if (i.user.id !== interaction.user.id) return i.followUp({ content: "DONT MESS WITH OTHERS BUTTONS!", ephemeral: true });
 
-                    // await i.deferUpdate()
-                    // a.setDisabled(true)
-                    // b.setDisabled(true)
                     /**
                         * @param {Guild} [Guild] - The discord server you want to backup
                         *       @param {object} [options] - The backup options

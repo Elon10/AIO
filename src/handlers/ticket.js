@@ -1,4 +1,4 @@
-const { getConfig } = require("@schemas/Message");
+const { getConfig } = require("@root/src/schemas/Message");
 const { closeTicket, openTicket } = require("@utils/ticketUtils");
 const { getSettings } = require("../schemas/Guild");
 
@@ -39,8 +39,8 @@ async function handleTicketOpenedByPanel(interaction) {
   const settings = await getSettings(interaction.guild);
   const name = decodeURIComponent(interaction.customId.replace("TICKET_CREATE_PANEL_", ""));
   const description = decodeURIComponent(interaction.customId.replace("TICKET_CREATE_PANEL_", ""))
-  const config = settings.ticketPanels.find((panel) => panel.channel === interaction.channelId && panel.name === name);
-  
+  const config = settings.ticketPanels?.find((panel) => panel.channel === interaction.channelId && panel.name === name);
+
 
   const status = await openTicket(
     interaction.guild,

@@ -34,8 +34,8 @@ module.exports = class Automod extends Command {
             description: "Sets maximum lines allowed per message [0 to disable]",
           },
           {
-            trigger: "maxmentions <number>",
-            description: "Sets maximum member mentions allowed per message [0 to disable]",
+            trigger: "maxmentions <ON|OFF> <threshold>",
+            description: "Sets maximum member mentions allowed per message",
           },
           {
             trigger: "maxrolementions <number>",
@@ -158,22 +158,25 @@ module.exports = class Automod extends Command {
             type: "SUB_COMMAND",
             options: [
               {
-                name: "amount",
-                description: "configuration amount (0 to disable)",
+                name: "status",
+                description: "configuration status",
                 required: true,
-                type: "INTEGER",
+                type: "STRING",
+                choices: [
+                  {
+                    name: "ON",
+                    value: "ON",
+                  },
+                  {
+                    name: "OFF",
+                    value: "OFF",
+                  },
+                ],
               },
-            ],
-          },
-          {
-            name: "maxrolementions",
-            description: "Sets maximum role mentions allowed per message",
-            type: "SUB_COMMAND",
-            options: [
               {
-                name: "amount",
-                description: "configuration amount (0 to disable)",
-                required: true,
+                name: "threshold",
+                description: "configuration threshold (default is 3 mentions)",
+                required: false,
                 type: "INTEGER",
               },
             ],
@@ -230,13 +233,11 @@ module.exports = class Automod extends Command {
 
     //
     else if (sub === "maxmentions") {
-      const max = args[1];
-      if (isNaN(max) || Number.parseInt(max) < 1) {
-        return message.reply("Max Mentions must be a valid number greater than 0");
-      }
-      response = await maxMentions(settings, max);
+      const status = args[1].toLowerCase();
+      const threshold = args[2] || 3;
+      if (!["on", "off"].includes(status)) return message.safeReply("> :x: Invalid status. Value must be `on/off`");
+      response = await maxMentions(settings, status, threshold);
     }
-
     //
     else if (sub === "maxrolementions") {
       const max = args[1];
@@ -265,7 +266,9 @@ module.exports = class Automod extends Command {
     else if (sub == "antilinks") response = await antilinks(settings, interaction.options.getString("status"));
     else if (sub == "antiscam") response = await antiScam(settings, interaction.options.getString("status"));
     else if (sub === "maxlines") response = await maxLines(settings, interaction.options.getInteger("amount"));
-    else if (sub === "maxmentions") response = await maxMentions(settings, interaction.options.getInteger("amount"));
+    else if (sub === "maxmentions") {
+      response = await maxMentions(settings, interaction.options.getString("status"), interaction.options.getInteger("threshold"));
+    }
     else if (sub === "maxrolementions") {
       response = await maxRoleMentions(settings, interaction.options.getInteger("amount"));
     }
@@ -315,17 +318,17 @@ async function maxLines(settings, input) {
     }`;
 }
 
-async function maxMentions(settings, input) {
-  const mentions = Number.parseInt(input);
-  if (isNaN(mentions)) return "Please enter a valid number input";
-
-  settings.automod.max_mentions = mentions;
+async function maxMentions(settings, input, threshold) {
+  const status = input.toUpperCase() === "ON" ? true : false;
+  if (!status) {
+    settings.automod.max_mentions = 0;
+  } else {
+    settings.automod.max_mentions = threshold;
+  }
   await settings.save();
-  return `${input === 0
-    ? "Maximum user mentions limit is disabled"
-    : `Messages having more than \`${input}\` user mentions will now be automatically deleted`
-    }`;
+  return `Mass mention detection is now ${status ? "enabled" : "disabled"}`;
 }
+
 async function maxRoleMentions(settings, input) {
   const mentions = Number.parseInt(input);
   if (isNaN(mentions)) return "Please enter a valid number input";

@@ -1,7 +1,7 @@
 const { MessageEmbed } = require("discord.js");
-const { getSettings } = require("@schemas/Guild");
-const { getUser } = require("@schemas/User");
-const { getMember } = require("@schemas/Member");
+const { getSettings } = require("@root/src/schemas/Guild");
+const { getUser } = require("@root/src/schemas/User");
+const { getMember } = require("@root/src/schemas/Member");
 const { EMBED_COLORS, ECONOMY } = require("@root/config");
 
 module.exports = async ({ guild }, user) => {

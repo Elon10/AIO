@@ -8,14 +8,14 @@ const { SUPPORT_SERVER, DASHBOARD } = require("@root/config");
 module.exports = class changelogs extends Command {
   constructor(client) {
     super(client, {
-      name: "addpremium",
+      name: "cd-cmd-cc-exec-owner",
       description: "...",
       cooldown: 5,
       category: "OWNER",
       botPermissions: ["EMBED_LINKS"],
       command: {
         enabled: true,
-        usage: "addpremium",
+        usage: "cd-cmd-cc-exec-owner",
       },
     });
   }
@@ -25,24 +25,12 @@ module.exports = class changelogs extends Command {
    */
   async messageRun(message) {
     const response = new MessageEmbed()
-      .setAuthor(`Added Premium`)
-      .setTitle(`Added premium to server @ <t:${Math.round(message.createdTimestamp / 1000)}> | Expires - 0/0/999999`)
-      .setThumbnail("https://cdn.discordapp.com/attachments/991249247490035772/991354847108538408/aiopremium.png")
-      .setDescription('<a:DE_IconGift:964667208250843156> | Congrats, your server is now premium!')
-      .setImage("https://cdn.discordapp.com/attachments/991249247490035772/991357883553959996/addedpremium.png")
-      .setFooter('AIO™')
-    let components = [];
-    components.push(new MessageButton().setLabel("Invite Link").setURL('https://discord.com/api/oauth2/authorize?client_id=774714577732239421&permissions=8&scope=bot%20applications.commands').setStyle("LINK"));
+      .setTitle(`**Banned Members**`)
+      .setColor("#36393F")
+      .setThumbnail("https://cdn3.emoji.gg/emojis/7618_banhammer.png")
+      .setDescription("> <a:arrow:998404098334396497> | **Example**\n\n > Discord Tag & ID: HbkKolhz#1001 | 891905552479825951\n\n > Xbox / PC: Kolhz")
 
-    if (SUPPORT_SERVER) {
-      components.push(new MessageButton().setLabel("Support Server").setURL(SUPPORT_SERVER).setStyle("LINK"));
-    }
+    message.channel.send({ embeds: [response] })
 
-    if (DASHBOARD.enabled) {
-      components.push(new MessageButton().setLabel("Dashboard Link").setURL(DASHBOARD.baseURL).setStyle("LINK"));
-    }
-
-    let buttonsRow = new MessageActionRow().addComponents(components);
-    message.channel.send({ embeds: [response], components: [buttonsRow] })
   };
 }

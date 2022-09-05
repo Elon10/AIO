@@ -3,8 +3,8 @@ const { Command } = require("@src/structures");
 const { EMBED_COLORS } = require("@root/config.js");
 
 // Schemas
-const { getSettings } = require("@schemas/Guild");
-const { createNewTicket } = require("@schemas/Message");
+const { getSettings } = require("@root/src/schemas/Guild");
+const { createNewTicket } = require("@root/src/schemas/Message");
 
 // Utils
 const { parsePermissions } = require("@utils/botUtils");
@@ -75,6 +75,12 @@ module.exports = class Ticket extends Command {
               {
                 name: "title",
                 description: "the title for the ticket message",
+                type: "STRING",
+                required: true,
+              },
+              {
+                name: "category-id",
+                description: "the category id to create tickets in",
                 type: "STRING",
                 required: true,
               },
@@ -250,6 +256,7 @@ module.exports = class Ticket extends Command {
     if (sub === "setup") {
       const channel = interaction.options.getChannel("channel");
       const title = interaction.options.getString("title");
+      const parentcat = interaction.options.getString("category")
       const description = interaction.options.getString("title")
       const role = interaction.options.getRole("role");
       const color = interaction.options.getString("color");
@@ -322,6 +329,7 @@ async function runInteractiveSetup({ channel, guild, author }) {
   let targetChannel;
   let title;
   let description;
+  let parentcat;
   let color;
   let role;
 
@@ -351,13 +359,13 @@ async function runInteractiveSetup({ channel, guild, author }) {
     if (reply.content.toLowerCase() === "cancel") return reply.reply("Ticket setup has been cancelled");
     description = reply.content;
 
-    await channel.send({ embeds: [embed.setDescription("Please enter the Category name of for the tickets to be created in")] });
+    await channel.send({ embeds: [embed.setDescription("Please enter the Category ID of for the tickets to be created in")] });
     reply = (await channel.awaitMessages({ filter, max: 1, time: SETUP_TIMEOUT })).first();
     if (reply.content.toLowerCase() === "cancel") return reply.reply("Ticket setup has been cancelled");
     category = reply.content;
 
 
-    
+
 
     // wait for roles
     const desc =

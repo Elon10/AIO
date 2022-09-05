@@ -7,7 +7,7 @@ const { resolveMember } = require("@utils/guildUtils");
 module.exports = class PurgeUser extends Command {
   constructor(client) {
     super(client, {
-      name: "purgeuser",
+      name: "clearuser",
       description: "deletes the specified amount of messages",
       category: "MODERATION",
       userPermissions: ["MANAGE_MESSAGES"],
@@ -15,7 +15,7 @@ module.exports = class PurgeUser extends Command {
       command: {
         enabled: true,
         usage: "<@user|ID> [amount]",
-        aliases: ["purgeusers"],
+        aliases: ["clearusers", "clu"],
         minArgsCount: 1,
       },
     });

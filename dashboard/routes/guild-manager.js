@@ -1,4 +1,4 @@
-const { getSettings } = require("@schemas/Guild");
+const { getSettings } = require("@root/src/schemas/Guild");
 const { MessageActionRow, MessageButton } = require("discord.js");
 
 const express = require("express"),
@@ -214,7 +214,6 @@ router.post("/:serverID/basic", CheckAuth, async (req, res) => {
       settings.automod.anti_ghostping = data.anti_ghostping;
     }
   }
-
   await settings.save();
   res.redirect(303, `/manage/${guild.id}/basic`);
 });
@@ -359,7 +358,7 @@ router.post("/:serverID/ticketpanels", CheckAuth, async (req, res) => {
 
   const settings = await getSettings(guild);
   const data = req.body;
-
+  if (!settings.ticketPanels) settings.ticketPanels = [];
   settings.ticketPanels.push({
     name: data.name,
     channel: data.channel,

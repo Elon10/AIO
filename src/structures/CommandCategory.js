@@ -1,12 +1,12 @@
 module.exports = {
   ADMIN: {
     name: "Admin",
-    image: "https://media.discordapp.net/attachments/945112333666099230/945114496400236544/admin.gif?width=400&height=400",
+    image: "https://media.discordapp.net/attachments/998404091157946480/1004131796218290277/moderation_ui.png?width=1161&height=677",
     emoji: "⚙️",
   },
   AUTOMOD: {
     name: "Automod",
-    image: "https://media.discordapp.net/attachments/945112333666099230/945116369014390794/automod.gif?width=400&height=400",
+    image: "https://media.discordapp.net/attachments/998404091157946480/1004131796218290277/moderation_ui.png?width=1161&height=677",
     emoji: "🤖",
   },
   ANIME: {
@@ -16,17 +16,17 @@ module.exports = {
   },
   ECONOMY: {
     name: "Economy",
-    image: "https://cdn.discordapp.com/attachments/945112333666099230/945117609412677673/economy.gif",
+    image: "https://media.discordapp.net/attachments/998404091157946480/1004131794897092709/ecomomy_ui.png?width=1161&height=677",
     emoji: "🪙",
   },
   FUN: {
     name: "Fun",
-    image: "https://cdn.discordapp.com/attachments/945112333666099230/945118013487738970/fun.gif",
+    image: "https://media.discordapp.net/attachments/998404091157946480/1004131795702386788/levels_ui.png?width=1161&height=677",
     emoji: "😂",
   },
   GIVEAWAY: {
     name: "Giveaway",
-    image: "https://pubwriter.net/images/gif/gift.gif",
+    image: "https://media.discordapp.net/attachments/998404091157946480/1004131795316506735/giveaways_ui.png?width=1161&height=677",
     emoji: "🎉",
   },
   IMAGE: {
@@ -46,12 +46,12 @@ module.exports = {
   },
   MODERATION: {
     name: "Moderation",
-    image: "https://media.discordapp.net/attachments/945112333666099230/945120103861735444/moderation.gif?width=400&height=400",
+    image: "https://media.discordapp.net/attachments/998404091157946480/1004131796218290277/moderation_ui.png?width=1161&height=677",
     emoji: "🔨",
   },
   MUSIC: {
     name: "Music",
-    image: "https://media.discordapp.net/attachments/945112333666099230/945120636580270100/Music.gif?width=400&height=400",
+    image: "https://media.discordapp.net/attachments/998404091157946480/1004131797073924106/music_ui.png?width=1161&height=677",
     emoji: "🎵",
   },
   OWNER: {
@@ -61,13 +61,13 @@ module.exports = {
   },
   SOCIAL: {
     name: "Social",
-    image: "https://cdn.discordapp.com/attachments/945112333666099230/945121474988089404/social.gif",
+    image: "https://media.discordapp.net/attachments/998404091157946480/1004131795702386788/levels_ui.png?width=1161&height=677",
     emoji: "🫂",
   },
   SUGGESTION: {
-  name: "Suggestion",
-  image: "https://cdn-icons-png.flaticon.com/512/1484/1484815.png",
-  emoji: "📝",
+    name: "Suggestion",
+    image: "https://cdn-icons-png.flaticon.com/512/1484/1484815.png",
+    emoji: "📝",
   },
   TICKET: {
     name: "Ticket",
@@ -76,12 +76,12 @@ module.exports = {
   },
   UTILITY: {
     name: "Utility",
-    image: "https://wellowise.com/assets/images/hotlink-ok/newPackages/rewiseMind/phone.gif",
+    image: "https://media.discordapp.net/attachments/992411771765801050/996943369311895582/IMG_0499.png",
     emoji: "🛠",
-  GIVEAWAY: {
-    name: "Giveaway",
-    image: "https://i.pinimg.com/originals/7d/b3/24/7db324ed27acf79d21e3a3132287623c.gif",
-    emoji: "🎁",
-  }
+    GIVEAWAY: {
+      name: "Giveaway",
+      image: "https://media.discordapp.net/attachments/998404091157946480/1004131795316506735/giveaways_ui.png?width=1161&height=677",
+      emoji: "🎁",
+    }
   },
 };

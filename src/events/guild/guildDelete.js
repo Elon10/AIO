@@ -1,12 +1,13 @@
 const { MessageEmbed } = require("discord.js");
 const { getSettings } = require("@schemas/Guild");
+require('terminal-colors');
 
 /**
  * @param {import('@src/structures').BotClient} client
  * @param {import('discord.js').Guild} guild
  */
 module.exports = async (client, guild) => {
-  client.logger.log(`Guild Left: ${guild.name} Members: ${guild.memberCount}`);
+  client.logger.log(`Guild Left: ${guild.name} Members: ${guild.memberCount}`.red);
 
   const settings = await getSettings(guild);
   settings.data.leftAt = new Date();

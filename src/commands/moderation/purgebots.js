@@ -6,7 +6,7 @@ const { sendMessage } = require("@utils/botUtils");
 module.exports = class PurgeBots extends Command {
   constructor(client) {
     super(client, {
-      name: "purgebots",
+      name: "clearbots",
       description: "deletes the specified amount of messages from bots",
       category: "MODERATION",
       userPermissions: ["MANAGE_MESSAGES"],
@@ -14,7 +14,7 @@ module.exports = class PurgeBots extends Command {
       command: {
         enabled: true,
         usage: "[amount]",
-        aliases: ["purgebot"],
+        aliases: ["cbm"],
       },
     });
   }

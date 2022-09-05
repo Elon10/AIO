@@ -65,7 +65,7 @@ module.exports = class Warn extends Command {
 
 async function warn(issuer, target, reason) {
   const response = await warnTarget(issuer, target, reason);
-  if (typeof response === "boolean") return `__Warn Case__ | Warn ID - #${randomInteger} \n\n> ${target.user.tag} has been warned by ${issuer.user.tag} | For reason: ${reason}\n\n __Other Information__\n Warns: ${target.user.warns} | Mutes: ${target.user.mutes} | Bans: ${target.user.bans} | Strikes: ${target.user.strikes}\n\n Current time - ${Date.now}`;
+  if (typeof response === "boolean") return `👌`;
   if (response === "BOT_PERM") return `I do not have permission to warn ${target.user.tag}`;
   else if (response === "MEMBER_PERM") return `You do not have permission to warn ${target.user.tag}`;
   else return `Failed to warn ${target.user.tag}`;

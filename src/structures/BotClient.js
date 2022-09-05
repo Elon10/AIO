@@ -9,6 +9,7 @@ const MusicManager = require("./MusicManager");
 const Command = require("./Command");
 const BaseContext = require("./BaseContext");
 const GiveawayManager = require("./GiveawayManager");
+chalk = require("chalk")
 
 module.exports = class BotClient extends Client {
   constructor() {
@@ -18,6 +19,7 @@ module.exports = class BotClient extends Client {
         Intents.FLAGS.GUILD_MESSAGES,
         Intents.FLAGS.GUILD_INVITES,
         Intents.FLAGS.GUILD_MEMBERS,
+        Intents.FLAGS.GUILD_PRESENCES,
         Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
         Intents.FLAGS.GUILD_VOICE_STATES,
       ],
@@ -54,12 +56,8 @@ module.exports = class BotClient extends Client {
     this.inviteCache = new Collection();
     this.antiScamCache = new Collection();
     this.flagTranslateCache = new Collection();
-    this.backupCache = new Collection || (create.collection)
 
 
-    this.joinLeaveWebhook = process.env.JOIN_LEAVE_LOGS
-      ? new WebhookClient({ url: process.env.JOIN_LEAVE_LOGS })
-      : online;
 
 
     this.musicManager = new MusicManager(this);
@@ -72,7 +70,7 @@ module.exports = class BotClient extends Client {
 
 
   async initializeMongoose() {
-    this.logger.log(`Connecting to MongoDb...`);
+    this.logger.log(chalk.yellow(`Connecting to MongoDb...`));
 
     await mongoose.connect(process.env.MONGO_CONNECTION, {
       keepAlive: true,
@@ -81,7 +79,7 @@ module.exports = class BotClient extends Client {
       useFindAndModify: false,
     });
 
-    this.logger.success("Mongoose: Database connection established");
+    this.logger.success(chalk.green(`Mongoose: Database connection established `));
   }
 
   /**
@@ -112,7 +110,7 @@ module.exports = class BotClient extends Client {
    * @param {string} directory 
    */
   loadEvents(directory) {
-    this.logger.log(`Loading events...`);
+    this.logger.log(chalk.yellow`Loading events...`);
     let success = 0;
     let failed = 0;
     const clientEvents = [];
@@ -139,7 +137,7 @@ module.exports = class BotClient extends Client {
         success += 1;
       } catch (ex) {
         failed += 1;
-        this.logger.error(`loadEvent - ${file}`, ex);
+        this.logger.error(chalk.red(`loadEvent - ${file}`, ex));
       }
     });
 
@@ -165,7 +163,7 @@ module.exports = class BotClient extends Client {
       })
     );
 
-    this.logger.log(`Loaded ${success + failed} events. Success (${success}) Failed (${failed})`);
+    this.logger.log(chalk.green(`Loaded ${success + failed} events. Success (${success}) Failed (${failed})`));
   }
 
   /**
@@ -184,23 +182,23 @@ module.exports = class BotClient extends Client {
     if (cmd.command?.enabled) {
       const index = this.commands.length;
       if (this.commandIndex.has(cmd.name)) {
-        throw new Error(`Command ${cmd.name} already registered`);
+        throw new Error(chalk.red(`Command ${cmd.name} already registered`));
       }
       cmd.command.aliases.forEach((alias) => {
-        if (this.commandIndex.has(alias)) throw new Error(`Alias ${alias} already registered`);
+        if (this.commandIndex.has(alias)) throw new Error(chalk.red(`Alias ${alias} already registered`));
         this.commandIndex.set(alias.toLowerCase(), index);
       });
       this.commandIndex.set(cmd.name.toLowerCase(), index);
       this.commands.push(cmd);
     } else {
-      this.logger.debug(`Skipping command ${cmd.name}. Disabled!`);
+      this.logger.debug(chalk.red(`Skipping command ${cmd.name}. Disabled!`));
     }
 
     if (cmd.slashCommand?.enabled) {
-      if (this.slashCommands.has(cmd.name)) throw new Error(`Slash Command ${cmd.name} already registered`);
+      if (this.slashCommands.has(cmd.name)) throw new Error(chalk.red(`Slash Command ${cmd.name} already registered`));
       this.slashCommands.set(cmd.name, cmd);
     } else {
-      this.logger.debug(`Skipping slash command ${cmd.name}. Disabled!`);
+      this.logger.debug(chalk.yellow(`Skipping slash command ${cmd.name}. Disabled!`));
     }
   }
 
@@ -208,7 +206,7 @@ module.exports = class BotClient extends Client {
    * @param {string} directory
    */
   loadCommands(directory) {
-    this.logger.log(`Loading commands...`);
+    this.logger.log(chalk.yellow(`Loading commands...`));
     this.getAbsoluteFilePaths(directory).forEach((filePath) => {
       const file = filePath.replace(/^.*[\\/]/, "");
       try {
@@ -217,12 +215,12 @@ module.exports = class BotClient extends Client {
         const cmd = new cmdClass(this);
         this.loadCommand(cmd);
       } catch (ex) {
-        this.logger.error(`Failed to load ${file} Reason: ${ex.message}`);
+        this.logger.error(chalk.red(`Failed to load ${file} Reason: ${ex.message}`));
       }
     });
-    this.logger.success(`Loaded ${this.commands.length} commands`);
-    this.logger.success(`Loaded ${this.slashCommands.size} slash commands`);
-    if (this.slashCommands.size > 1000) throw new Error("A maximum of 1000 slash commands can be enabled");
+    this.logger.success(chalk.green(`Loaded ${this.commands.length} commands`));
+    this.logger.success(chalk.green(`Loaded ${this.slashCommands.size} slash commands`));
+    if (this.slashCommands.size > 100) throw new Error(chalk.red(`A maximum of 100 slash commands can be enabled`));
   }
 
   /**
@@ -230,28 +228,28 @@ module.exports = class BotClient extends Client {
    * @param {string} directory
    */
   loadContexts(directory) {
-    this.logger.log(`Loading contexts...`);
+    this.logger.log(chalk.yellow(`Loading contexts...`));
     this.getAbsoluteFilePaths(directory).forEach((filePath) => {
       const file = filePath.replace(/^.*[\\/]/, "");
       try {
         const ctxClass = require(filePath);
         if (!(ctxClass.prototype instanceof BaseContext)) return;
         const ctx = new ctxClass(this);
-        if (!ctx.enabled) return this.logger.debug(`Skipping context ${ctx.name}. Disabled!`);
+        if (!ctx.enabled) return this.logger.debug(chalk.yellow(`Skipping context ${ctx.name}. Disabled!`));
         if (this.contextMenus.has(ctx.name)) throw new Error(`Context already exists with that name`);
         this.contextMenus.set(ctx.name, ctx);
       } catch (ex) {
-        this.logger.error(`Context: Failed to load ${file} Reason: ${ex.message}`);
+        this.logger.error(chalk.red(`Context: Failed to load ${file} Reason: ${ex.message}`));
       }
     });
     const userContexts = this.contextMenus.filter((ctx) => ctx.type === "USER").size;
     const messageContexts = this.contextMenus.filter((ctx) => ctx.type === "MESSAGE").size;
 
-    if (userContexts > 3) throw new Error("A maximum of 3 USER contexts can be enabled");
-    if (messageContexts > 3) throw new Error("A maximum of 3 MESSAGE contexts can be enabled");
+    if (userContexts > 3) throw new Error(chalk.red(`A maximum of 3 USER contexts can be enabled`));
+    if (messageContexts > 3) throw new Error(chalk.red(`A maximum of 3 MESSAGE contexts can be enabled`));
 
-    this.logger.success(`Loaded ${userContexts} USER contexts`);
-    this.logger.success(`Loaded ${messageContexts} MESSAGE contexts`);
+    this.logger.success(chalk.green(`Loaded ${userContexts} USER contexts`));
+    this.logger.success(chalk.green(`Loaded ${messageContexts} MESSAGE contexts`));
   }
 
   /**
@@ -291,16 +289,16 @@ module.exports = class BotClient extends Client {
     // Register for a specific guild
     else if (guildId && typeof guildId === "string") {
       const guild = this.guilds.cache.get(guildId);
-      if (!guild) throw new Error(`No guilds found matching ${guildId}`);
+      if (!guild) throw new Error(chalk.red(`No guilds found matching ${guildId}`));
       await guild.commands.set(toRegister);
     }
 
     // Throw an error
     else {
-      throw new Error(`Did you provide a valid guildId to register slash commands`);
+      throw new Error(chalk.red(`Did you provide a valid guildId to register slash commands`));
     }
 
-    this.logger.success("Successfully registered slash commands");
+    console.log(chalk.green(`Successfully registered slash commands`));
   }
 
   /**

@@ -1,5 +1,6 @@
 const { MessageEmbed } = require("discord.js");
 const { getSettings: registerGuild } = require("@schemas/Guild");
+require('terminal-colors');
 
 /**
  * @param {import('@src/structures').BotClient} client
@@ -7,8 +8,8 @@ const { getSettings: registerGuild } = require("@schemas/Guild");
  */
 module.exports = async (client, guild) => {
   if (!guild.members.cache.has(guild.ownerId)) await guild.fetchOwner({ cache: true });
-  client.logger.log(`Guild Joined: ${guild.name} Members: ${guild.memberCount}`);
-  
+  client.logger.log(`Guild Joined: ${guild.name} Members: ${guild.memberCount}`.green);
+
   await registerGuild(guild);
 
   if (!client.joinLeaveWebhook) return;

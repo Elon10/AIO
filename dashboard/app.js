@@ -32,7 +32,7 @@ module.exports.launch = async (client) => {
     .use(
       session({
         secret: process.env.SESSION_PASSWORD,
-        resave: false,
+        resave: true,
         saveUninitialized: false,
         store: MongoStore.create({
           mongoUrl: process.env.MONGO_CONNECTION,

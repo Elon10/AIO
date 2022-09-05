@@ -7,6 +7,6 @@ const { sendMessage } = require("@utils/botUtils");
  */
 module.exports = (client, player) => {
   const channel = client.channels.cache.get(player.textChannel);
-  sendMessage(channel, "Queue has ended.");
-  player.destroy();
+  player.destroy()
+  sendMessage(channel, "Queue has ended please play another song using /play for the bot to reconnect to the VC");
 };

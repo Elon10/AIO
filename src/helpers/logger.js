@@ -42,7 +42,7 @@ const sendLogs = (level, content, data) => {
       break;
 
     case "success":
-      console.log(`[${chalk.cyan(timestamp)}] [${chalk.green(level)}] ${content} `);
+      console.log(`[${chalk.cyan(timestamp)}] [${chalk.blue(level)}] ${content} `);
       simpleLogger.info(content);
       break;
 

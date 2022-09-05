@@ -8,7 +8,7 @@ const { sendMessage } = require("@utils/botUtils");
 module.exports = class PurgeCommand extends Command {
   constructor(client) {
     super(client, {
-      name: "purge",
+      name: "clear",
       description: "purge commands",
       category: "MODERATION",
       userPermissions: ["MANAGE_MESSAGES"],
@@ -20,7 +20,7 @@ module.exports = class PurgeCommand extends Command {
         options: [
           {
             name: "all",
-            description: "purge all messages",
+            description: "clear all messages",
             type: "SUB_COMMAND",
             options: [
               {
@@ -40,7 +40,7 @@ module.exports = class PurgeCommand extends Command {
           },
           {
             name: "attachments",
-            description: "purge all messages with attachments",
+            description: "clear all messages with attachments",
             type: "SUB_COMMAND",
             options: [
               {
@@ -60,7 +60,7 @@ module.exports = class PurgeCommand extends Command {
           },
           {
             name: "bots",
-            description: "purge all bot messages",
+            description: "clear all bot messages",
             type: "SUB_COMMAND",
             options: [
               {
@@ -80,7 +80,7 @@ module.exports = class PurgeCommand extends Command {
           },
           {
             name: "links",
-            description: "purge all messages with links",
+            description: "clear all messages with links",
             type: "SUB_COMMAND",
             options: [
               {
@@ -100,7 +100,7 @@ module.exports = class PurgeCommand extends Command {
           },
           {
             name: "token",
-            description: "purge all messages containing the specified token",
+            description: "clear all messages containing the specified message content",
             type: "SUB_COMMAND",
             options: [
               {
@@ -111,8 +111,8 @@ module.exports = class PurgeCommand extends Command {
                 required: true,
               },
               {
-                name: "token",
-                description: "token to be looked up in messages",
+                name: "message-content",
+                description: "message content to be looked up in messages",
                 type: "STRING",
                 required: true,
               },
@@ -126,7 +126,7 @@ module.exports = class PurgeCommand extends Command {
           },
           {
             name: "user",
-            description: "purge all messages from the specified user",
+            description: "clear all messages from the specified user",
             type: "SUB_COMMAND",
             options: [
               {
@@ -184,7 +184,7 @@ module.exports = class PurgeCommand extends Command {
         break;
 
       case "token": {
-        const token = interaction.options.getString("token");
+        const token = interaction.options.getString("message-content");
         response = await purgeMessages(member, channel, "TOKEN", amount, token);
         break;
       }

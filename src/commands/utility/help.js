@@ -126,7 +126,7 @@ async function getHelpMenu({ client, guild }) {
 
   const embed = new MessageEmbed()
     .setColor(EMBED_COLORS.BOT_EMBED)
-    .setThumbnail('https://media2.giphy.com/media/WO6TiLAAfjVVnIf3JK/200.gif?cid=95b279447e3f017d721713e95ced94a14fb94432f16fb54b&rid=200.gif&ct=s')
+    .setThumbnail('https://media.discordapp.net/attachments/992411771765801050/997224302757814292/IMG_0512.gif')
     .setDescription(
       "**About Me:**\n" +
       `Hello I am ${guild.me.displayName}!\n` +

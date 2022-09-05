@@ -3,15 +3,17 @@ const { cacheReactionRoles } = require("@schemas/Message");
 const { getSettings } = require("@schemas/Guild");
 const { updateCounterChannels } = require("@src/handlers/counter");
 const { PRESENCE } = require("@root/config");
+chalk = require("chalk")
+
 
 /**
  * @param {import('@src/structures').BotClient} client
  */
 module.exports = async (client) => {
-  client.logger.success(`Logged in as ${client.user.tag}! (${client.user.id})`);
+  console.log(chalk.greenBright(`Logged in as ${client.user.tag}! (${client.user.id}`));
 
   // Initialize Music Manager
-  client.logger.log("Initializing music manager");
+  console.log(chalk.yellow(`Initializing music manager`));
   client.musicManager.init(client.user.id);
 
   // Update Bot Presence

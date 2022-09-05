@@ -1,17 +1,17 @@
 module.exports = {
   OWNER_IDS: ["263761253414076417", "658441101861978151"], // Bot owner ID's
   PREFIX: "!", // Default prefix for the bot
-  SUPPORT_SERVER: "https://discord.gg/NVrDzMutnd", // Your bot support serve
+  SUPPORT_SERVER: "https://discord.gg/us46reuQR3", // Your bot support serve
   PRESENCE: {
     ENABLED: true, // Whether or not the bot should update its status
     STATUS: "online", // The bot's status [online, idle, dnd, invisible]
     TYPE: "PLAYING", // Status type for the bot [PLAYING | LISTENING | WATCHING | COMPETING]
-    MESSAGE: "🏳‍🌈 Happy pride month ❤ | Users: {members} | Servers: {servers}", // Your bot status message
+    MESSAGE: "❤ Users: {members} | Servers: {servers}", // Your bot status message
   },
   DASHBOARD: {
     enabled: true, // enable or disable dashboard
     baseURL: "https://dashboard.aiodiscord.xyz/", // base url
-    failureURL: "https://dashboard.aiodiscord.xyz/error", // failure redirect url
+    failureURL: "https://dashboard.aiodiscord.xyz/servers", // failure redirect url
     port: "8080", // port to run the bot on
   },
   INTERACTIONS: {
@@ -21,7 +21,7 @@ module.exports = {
     TEST_GUILD_ID: "", // Guild ID where the interactions should be registered. [** Test you commands here first **]
   },
   XP_SYSTEM: {
-    COOLDOWN: 100, // Cooldown in seconds between messages
+    COOLDOWN: 30, // Cooldown in seconds between messages
     DEFAULT_LVL_UP_MSG: "{m}, You just advanced to **Level {l}**",
   },
   MISCELLANEOUS: {
@@ -49,17 +49,9 @@ module.exports = {
     MAX_SEARCH_RESULTS: 5,
     NODES: [
       {
-        host: "lavalink.kapes.eu",
-        port: 2222,
-        password: "lavalinkplay",
-        retryDelay: 5000,
-        secure: false,
-      },
-      {
-        host: "lavalink.gaproknetwork.xyz",
-        port: 2333,
-        password: "gaproklavalink",
-        identifier: "lavalink",
+        host: "198.55.117.137",
+        port: 4532,
+        password: "aiolavl",
         retryDelay: 5000,
         secure: false,
       },

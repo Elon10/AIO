@@ -6,7 +6,7 @@ const { sendMessage } = require("@utils/botUtils");
 module.exports = class PurgeLinks extends Command {
   constructor(client) {
     super(client, {
-      name: "purgelinks",
+      name: "clearlinks",
       description: "deletes the specified amount of messages with links",
       category: "MODERATION",
       userPermissions: ["MANAGE_MESSAGES"],
@@ -14,7 +14,7 @@ module.exports = class PurgeLinks extends Command {
       command: {
         enabled: true,
         usage: "[amount]",
-        aliases: ["purgelink"],
+        aliases: ["cll"],
       },
     });
   }
