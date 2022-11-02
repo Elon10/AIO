@@ -5,7 +5,6 @@ const { table } = require("table");
 const mongoose = require("mongoose");
 mongoose.plugin(require("mongoose-lean-defaults").default);
 const logger = require("../helpers/logger");
-const MusicManager = require("./MusicManager");
 const Command = require("./Command");
 const BaseContext = require("./BaseContext");
 const GiveawayManager = require("./GiveawayManager");
@@ -57,10 +56,10 @@ module.exports = class BotClient extends Client {
     this.antiScamCache = new Collection();
     this.flagTranslateCache = new Collection();
 
+    this.joinLeaveWebhook = process.env.JOIN_LEAVE_LOGS
+      ? new WebhookClient({ url: process.env.JOIN_LEAVE_LOGS })
+      : undefined;
 
-
-
-    this.musicManager = new MusicManager(this);
 
     this.giveawaysManager = new GiveawayManager(this);
 
@@ -114,7 +113,7 @@ module.exports = class BotClient extends Client {
     let success = 0;
     let failed = 0;
     const clientEvents = [];
-    const musicEvents = [];
+
 
     this.getAbsoluteFilePaths(directory).forEach((filePath) => {
       const file = filePath.replace(/^.*[\\/]/, "");
@@ -123,15 +122,8 @@ module.exports = class BotClient extends Client {
         const eventName = file.split(".")[0];
         const event = require(filePath);
 
-        if (dirName === "music") {
-          this.musicManager.on(eventName, event.bind(null, this));
-          musicEvents.push([file, "✓"]);
-        }
-
-        else {
-          this.on(eventName, event.bind(null, this));
-          clientEvents.push([file, "✓"]);
-        }
+		this.on(eventName, event.bind(null, this));
+        clientEvents.push([file, "✓"]);
 
         delete require.cache[require.resolve(filePath)];
         success += 1;
@@ -141,27 +133,6 @@ module.exports = class BotClient extends Client {
       }
     });
 
-    console.log(
-      table(clientEvents, {
-        header: {
-          alignment: "center",
-          content: "Client Events",
-        },
-        singleLine: true,
-        columns: [{ width: 25 }, { width: 5, alignment: "center" }],
-      })
-    );
-
-    console.log(
-      table(musicEvents, {
-        header: {
-          alignment: "center",
-          content: "Music Events",
-        },
-        singleLine: true,
-        columns: [{ width: 25 }, { width: 5, alignment: "center" }],
-      })
-    );
 
     this.logger.log(chalk.green(`Loaded ${success + failed} events. Success (${success}) Failed (${failed})`));
   }

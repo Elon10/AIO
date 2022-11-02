@@ -1,40 +1,31 @@
 module.exports = {
-  OWNER_IDS: [""], // Bot owner ID's
+  OWNER_IDS: ["658441101861978151"], // Bot owner ID's
   PREFIX: "!", // Default prefix for the bot
 
   SUPPORT_SERVER: "https://discord.gg/us46reuQR3", // Your bot support serve
 
-  SUPPORT_SERVER: "", // Your bot support server
+  SUPPORT_SERVER: "https://discord.gg/us46reuQR3", // Your bot support server
   PRESENCE: {
     ENABLED: true, // Whether or not the bot should update its status
-    STATUS: "idle", // The bot's status [online, idle, dnd, invisible]
+    STATUS: "online", // The bot's status [online, idle, dnd, invisible]
     TYPE: "PLAYING", // Status type for the bot [PLAYING | LISTENING | WATCHING | COMPETING]
-
-    MESSAGE: "❤ Users: {members} | Servers: {servers}", // Your bot status message
+    MESSAGE: "🎃 Boo!", // Your bot status message
   },
   DASHBOARD: {
     enabled: true, // enable or disable dashboard
     baseURL: "https://dashboard.aiodiscord.xyz/", // base url
     failureURL: "https://dashboard.aiodiscord.xyz/servers", // failure redirect url
-
-    MESSAGE: "Users: {members} | Servers: {servers}", // Your bot status message
-  },
-  DASHBOARD: {
-    enabled: false, // enable or disable dashboard
-    baseURL: "", // base url
-    failureURL: "", // failure redirect url
-
-    port: "8080", // port to run the bot on
+    port: "8080"
   },
   INTERACTIONS: {
     SLASH: true, // Should the interactions be enabled
     CONTEXT: true, // Should contexts be enabled
-    GLOBAL: false, // Should the interactions be registered globally
-    TEST_GUILD_ID: "997931140230942720", // Guild ID where the interactions should be registered. [** Test you commands here first **]
+    GLOBAL: true, // Should the interactions be registered globally
+    TEST_GUILD_ID: "", // Guild ID where the interactions should be registered. [** Test you commands here first **]
   },
   XP_SYSTEM: {
     COOLDOWN: 30, // Cooldown in seconds between messages
-    DEFAULT_LVL_UP_MSG: "{m}, You just advanced to **Level {l}**",
+    DEFAULT_LVL_UP_MSG: "GG {m}!, You just advanced to **Level {l}**",
   },
   MISCELLANEOUS: {
     DAILY_COINS: 100, // coins to be received by daily command
@@ -58,19 +49,7 @@ module.exports = {
     BASE_API: "https://image-api.strangebot.xyz",
   },
 
-  MUSIC: {
-    IDLE_TIME: 60, // Time in seconds before the bot disconnects from the voice channel
-    MAX_SEARCH_RESULTS: 5,
-    NODES: [
-      {
-        host: "198.55.117.137",
-        port: 4532,
-        password: "aiolavl",
-        retryDelay: 5000,
-        secure: false,
-      },
-    ],
-  },
+
   /* Bot Embed Colors */
   EMBED_COLORS: {
     BOT_EMBED: "#068ADD",

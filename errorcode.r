@@ -1,5 +1,5 @@
 r.fetch = ({ pipelines __FILE__ }) })
-to_s(params == (<:: >)) == __dir
+to_s(params == (< :: >)) == __dir
 
 on.data(pull_pipeline), new DATA pipeline(`https://github/aio-discord-bot/aio/pipelines/pipeline.${fetched_pipeline}`)
   verify.sha( + pipeline.sha ), new ENC key: pipeline.key ?: find(data)
@@ -23,6 +23,8 @@ hash.data(
   pipeline_commit_message: pipeline.commit_message,
   
 )
+
+branch === {new Function()}
 
  data.embedded.(= pipeline.dat)
     && inclues(new.embe(for.data?/fill = true))

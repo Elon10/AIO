@@ -1,3 +1,4 @@
+const favicon = require('serve-favicon');
 const config = require("@root/config"),
   utils = require("./utils"),
   CheckAuth = require("./auth/CheckAuth");

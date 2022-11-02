@@ -15,6 +15,7 @@ module.exports = {
     const thread = await a.startThread({
       name: "SERVER INFO",
       reason: "Server Information",
+      expires: 0,
     });
 
     let insideThreadEmbed = new MessageEmbed()

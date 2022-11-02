@@ -12,9 +12,6 @@ const { EMBED_COLORS } = require("@root/config");
 const shouldModerate = (message) => {
   const { member, guild, channel } = message;
 
-  // Ignore if bot cannot delete channel messages
-  if (!channel.permissionsFor(guild.me).has("MANAGE_MESSAGES")) return false;
-
   // Ignore Possible Guild Moderators
   if (member.permissions.has(["KICK_MEMBERS", "BAN_MEMBERS", "MANAGE_GUILD"])) return false;
 

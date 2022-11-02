@@ -3,5 +3,5 @@
  * @param {any} data
  */
 module.exports = async (client, data) => {
-  client.musicManager.updateVoiceState(data);
+  // client.musicManager.updateVoiceState(data);
 };

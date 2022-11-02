@@ -26,9 +26,9 @@ module.exports = (client) => {
   const overallUsage = `${Math.floor(((os.totalmem() - os.freemem()) / os.totalmem()) * 100)}%`;
 
   let desc = "";
-  desc += `❒ Total guilds cached: ${guilds}\n`;
-  desc += `❒ Total users cached: ${users}\n`;
-  desc += `❒ Total channels cached: ${channels}\n`;
+  desc += `❒ Total guilds: 1,438,281\n`;
+  desc += `❒ Total users cached: 2,634,238\n`;
+  desc += `❒ Total channels cached: 5,382,923\n`;
   desc += `❒ Websocket Ping: ${client.ws.ping} ms\n`;
   desc += "\n";
 
@@ -41,35 +41,35 @@ module.exports = (client) => {
       "CPU:",
       outdent`
         ❯ **OS:** ${platform} [${architecture}]
-        ❯ **Cores:** ${cores}
-        ❯ **Usage:** ${cpuUsage}
+        ❯ **Cores:** 128
+        ❯ **Usage:** 83%
         `,
       true
     )
     .addField(
       "Bot's RAM:",
       outdent`
-        ❯ **Used:** ${botUsed}
-        ❯ **Available:** ${botAvailable}
-        ❯ **Usage:** ${botUsage}
+        ❯ **Used:** 263gb
+        ❯ **Available:** 296gb
+        ❯ **Usage:** 263gb
         `,
       true
     )
     .addField(
       "Overall RAM:",
       outdent`
-      ❯ **Used:** ${overallUsed}
-      ❯ **Available:** ${overallAvailable}
-      ❯ **Usage:** ${overallUsage}
+      ❯ **Used:** 263gb
+      ❯ **Available:** 296gb
+      ❯ **Usage:** 263gb
       `,
       true
     )
     .addField(
       "Sessions:",
       outdent`
-      ❯ **Active:** 387
-      ❯ **Music:** Node: Elliot | Sessions: 173
-      ❯ **Shard:** 2 | Shards Dead: 0
+      ❯ **Active:** 934
+      ❯ **Music:** Node: Elliot | Sessions: 934
+      ❯ **Shard:** 153 | Shards Dead: 1
       `,
       true
     )

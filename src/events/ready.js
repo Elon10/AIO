@@ -10,11 +10,9 @@ chalk = require("chalk")
  * @param {import('@src/structures').BotClient} client
  */
 module.exports = async (client) => {
-  console.log(chalk.greenBright(`Logged in as ${client.user.tag}! (${client.user.id}`));
+  console.log(chalk.greenBright(`Logged in as ${client.user.tag}! (${client.user.id})`));
 
-  // Initialize Music Manager
-  console.log(chalk.yellow(`Initializing music manager`));
-  client.musicManager.init(client.user.id);
+//  client.musicManager.init(client.user.id);
 
   // Update Bot Presence
   if (PRESENCE.ENABLED) {

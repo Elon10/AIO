@@ -159,7 +159,7 @@ class Command {
     try {
       await this.messageRun(message, args, invoke, prefix);
     } catch (ex) {
-      await message.channel.send("Oops! We encounterd an error wise running that command! Here's an error instead:", ex);
+      await message.channel.send("Oops! We encounterd an error wise running that command! Here's all we know: DISPATCH/npm failed request | If you need support: discord.gg/aio", ex);
       this.client.logger.error(chalk.red`messageRun`, ex);
     } finally {
       this.applyCooldown(message.author.id);

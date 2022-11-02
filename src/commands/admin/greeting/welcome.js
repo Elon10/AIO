@@ -4,6 +4,7 @@ const { buildGreeting } = require("@src/handlers/greeting");
 const { Message, CommandInteraction } = require("discord.js");
 const { canSendEmbeds } = require("@utils/guildUtils");
 const { sendMessage } = require("@utils/botUtils");
+const { getSettings } = require("@schemas/Guild");
 
 module.exports = class Welcome extends Command {
   constructor(client) {

@@ -23,12 +23,6 @@ const Schema = mongoose.Schema({
             default: 0,
         },
     },
-<<<<<<< HEAD
-    prefix: {
-        type: String,
-        default: PREFIX,
-=======
-  },
   muteRole: {
     enabled: {
       type: Boolean,
@@ -69,16 +63,6 @@ const Schema = mongoose.Schema({
     type: String,
     default: PREFIX,
   },
-  ranking: {
-    enabled: Boolean,
-  },
-  ticket: {
-    log_channel: String,
-    limit: {
-      type: Number,
-      default: 10,
->>>>>>> d067698e3ef4d73c47c98b98159ba765f43555d4
-    },
     ranking: {
         enabled: Boolean,
     },

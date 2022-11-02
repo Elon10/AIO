@@ -52,7 +52,7 @@ module.exports = class HelpCommand extends Command {
       if (cache[`${message.guildId}|${message.author.id}`]) {
         return message.reply("You are already viewing the help menu.");
       }
-      const response = await getHelpMenu(message);
+      const response = await getHelpMenu(Message);
       const sentMsg = await message.reply(response);
       return waiter(sentMsg, message.author.id, prefix);
     }
@@ -118,49 +118,21 @@ async function getHelpMenu({ client, guild }) {
   // Buttons Row
   let components = [];
   components.push(
-<<<<<<< HEAD
     new MessageButton().setCustomId("previousBtn").setEmoji("<a:Emojii_LeftArrow:987502525601153104>").setStyle("SECONDARY").setDisabled(true),
     new MessageButton().setCustomId("nextBtn").setEmoji("<a:Emojii_RightArrow:987502521587236934>").setStyle("SECONDARY").setDisabled(true)
-=======
-    new MessageButton()
-      .setCustomId("previousBtn")
-      .setEmoji("<:arrow2:942835729237700718>")
-      .setStyle("SECONDARY")
-      .setDisabled(true),
-    new MessageButton()
-      .setCustomId("nextBtn")
-      .setEmoji("<:arrow1:942835717216817253>")
-      .setStyle("SECONDARY")
-      .setDisabled(true)
->>>>>>> d067698e3ef4d73c47c98b98159ba765f43555d4
   );
-
   let buttonsRow = new MessageActionRow().addComponents(components);
-
   const embed = new MessageEmbed()
     .setColor(EMBED_COLORS.BOT_EMBED)
-<<<<<<< HEAD
     .setThumbnail('https://media.discordapp.net/attachments/992411771765801050/997224302757814292/IMG_0512.gif')
     .setDescription(
       "**About Me:**\n" +
-      `Hello I am ${guild.me.displayName}!\n` +
+      `👋 Hello I am AIO!\n` +
       "I am a Multifunctional bot made by my creator River#0003\n" +
-      `My prefix is \`!\` **or** \`/\` to use slash commands!\n\n **Help:** Direct Message River#0003`)
+      `My prefix is \`!\` **or** \`/\` to use slash commands!\n\n **Help:** Support Server: [Click Here](https://discord.gg/us46reuQR3)`)
     .setFooter('AIO • 2022')
 
 
-=======
-    .setThumbnail(
-      "https://media2.giphy.com/media/WO6TiLAAfjVVnIf3JK/200.gif?cid=95b279447e3f017d721713e95ced94a14fb94432f16fb54b&rid=200.gif&ct=s"
-    )
-    .setDescription(
-      "**About Me:**\n" +
-        `Hello I am ${guild.me.displayName}!\n` +
-        "I am a Multifunctional bot made by my creator River#0003\n" +
-        `My prefix is \`!\` **or** \`/\` to use slash commands!\n\n **Help:** Direct Message River#0003`
-    )
-    .setFooter("AIO • 2022");
->>>>>>> d067698e3ef4d73c47c98b98159ba765f43555d4
 
   return {
     embeds: [embed],
@@ -175,7 +147,7 @@ async function getHelpMenu({ client, guild }) {
  */
 const waiter = (msg, userId, prefix) => {
   // Add to cache
-  cache[`${msg.guildId}|${userId}`] = Date.now();
+  cache[`${msg.guildId} | ${userId}`] = Date.now();
 
   const collector = msg.channel.createMessageComponentCollector({
     filter: (reactor) => reactor.user.id === userId,
@@ -219,7 +191,7 @@ const waiter = (msg, userId, prefix) => {
   });
 
   collector.on("end", () => {
-    if (cache[`${msg.guildId}|${userId}`]) delete cache[`${msg.guildId}|${userId}`];
+    if (cache[`${msg.guildId} | ${userId}`]) delete cache[`${msg.guildId} | ${userId}`];
     return msg.editable && msg.edit({ components: [] });
   });
 };
@@ -236,7 +208,7 @@ function getSlashCategoryEmbeds(client, category) {
   if (category === "IMAGE") {
     client.slashCommands
       .filter((cmd) => cmd.category === category)
-      .forEach((cmd) => (collector += `\`/${cmd.name}\`\n ❯ ${cmd.description}\n\n`));
+      .forEach((cmd) => (collector += `/ ${cmd.name}\n <: icons_text1: 998419169999593554 > ${cmd.description}\n\n`));
 
     const availableFilters = client.slashCommands
       .get("filter")
@@ -249,7 +221,7 @@ function getSlashCategoryEmbeds(client, category) {
       .join(", ");
 
     collector +=
-      "**Available Filters:**\n" + `${availableFilters}` + `*\n\n**Available Generators**\n` + `${availableGens}`;
+      "**Available Filters:**\n" + `${availableFilters}` + ` *\n\n ** Available Generators **\n` + `${availableGens}`;
 
     const embed = new MessageEmbed()
       .setColor(EMBED_COLORS.BOT_EMBED)
@@ -283,7 +255,7 @@ function getSlashCategoryEmbeds(client, category) {
       const subCmds = cmd.slashCommand.options.filter((opt) => opt.type === "SUB_COMMAND");
       const subCmdsString = subCmds.map((s) => s.name).join(", ");
 
-      return `\`/${cmd.name}\`\n <:arrow:948311928009261076> **Description**: ${cmd.description}\n ${subCmds == 0 ? "" : `<:sub:948311942651592735> **SubCommands [${subCmds.length}]**: ${subCmdsString}\n`
+      return ` / ${cmd.name}\n <: arrow: 988623664108961862 > ** Description **: ${cmd.description}\n ${subCmds == 0 ? "" : `<:icons_text1:998419169999593554> **SubCommands [${subCmds.length}]**: ${subCmdsString}\n`
         } `;
     });
 
@@ -296,7 +268,7 @@ function getSlashCategoryEmbeds(client, category) {
       .setThumbnail(CommandCategory[category].image)
       .setAuthor(`${category} Commands`)
       .setDescription(item.join("\n"))
-      .setFooter(`page ${index + 1} of ${arrSplitted.length}`);
+      .setFooter(`page ${index + 1} of ${arrSplitted.length} `);
     arrEmbeds.push(embed);
   });
 

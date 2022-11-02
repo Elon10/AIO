@@ -23,6 +23,7 @@ poster.on('posted', (stats) => {
 // catch client errors and warnings
 client.on("error", (err) => client.logger.error(`Client Error`, err));
 client.on("warn", (message) => client.logger.warn(`Client Warning: ${message}`));
+client.on("debug", (message) => console.log(message));
 
 // find unhandled promise rejections
 process.on("unhandledRejection", (err) => {

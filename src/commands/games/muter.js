@@ -8,11 +8,11 @@ module.exports = class muteCommand extends Command {
             description: "A muter roullete that mutes the winner.",
             category: "GAMES",
             command: {
-                enabled: true,
+                enabled: false,
                 minArgsCount: 1,
             },
             slashCommand: {
-                enabled: true,
+                enabled: false,
                 options: [
                     {
                         name: "muter",

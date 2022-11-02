@@ -98,16 +98,16 @@ async function gamble(user, betAmount) {
   const slot3 = getEmoji();
 
   const str = `
-    **Gamble Amount:** ${betAmount}${ECONOMY.CURRENCY}
-    **Multiplier:** 2x
-    <:icons_text3:950210611952885770>══════════╗
-    <:icons_text4:950210608161239080> ${getEmoji()} <:icons_text4:950210608161239080> ${getEmoji()} <:icons_text4:950210608161239080> ${getEmoji()} ‎‎‎‎║
-    <:icons_text4:950210608161239080>══════════<:icons_text4:950210608161239080>
-    <:icons_text4:950210608161239080> ${slot1} <:icons_text4:950210608161239080> ${slot2} <:icons_text4:950210608161239080> ${slot3} ⟸
-    <:icons_text4:950210608161239080>══════════<:icons_text4:950210608161239080>
-    <:icons_text4:950210608161239080> ${getEmoji()} <:icons_text4:950210608161239080> ${getEmoji()} <:icons_text4:950210608161239080> ${getEmoji()} <:icons_text4:950210608161239080>
-    <:icons_text1:950210629598330880>══════════╝
-    `;
+  **Gamble Amount:** ${betAmount}${ECONOMY.CURRENCY}
+  **Multiplier:** 2x
+  ╔══════════╗
+  ║ ${getEmoji()} ║ ${getEmoji()} ║ ${getEmoji()} ‎‎‎‎║
+  ╠══════════╣
+  ║ ${slot1} ║ ${slot2} ║ ${slot3} ⟸
+  ╠══════════╣
+  ║ ${getEmoji()} ║ ${getEmoji()} ║ ${getEmoji()} ║
+  ╚══════════╝
+  `;
 
   const reward = calculateReward(betAmount, slot1, slot2, slot3);
   const result = (reward > 0 ? `You won: ${reward}` : `You lost: ${betAmount}`) + ECONOMY.CURRENCY;
